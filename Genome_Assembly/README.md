@@ -58,3 +58,10 @@ export _JAVA_OPTIONS=-Djava.io.tmpdir=/home/jilong/spider2/faststorage/social_sp
 /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/3d_dna/3d-dna/run-asm-pipeline.sh -r {r} --early-exit --editor-repeat-coverage 30 --editor-coarse-stringency 20 --splitter-input-size 500000 --splitter-coarse-resolution 500000 --splitter-coarse-stringency 20 {fasta} {merged} > {folder}/{species}_3ddna.log.tmp
 mv {folder}/{species}_3ddna.log.tmp {folder}/{species}_3ddna.log
 ```
+
+3. After 3D-DNA scaffolding process, we manually review and curate the contigs orders and orientation in the megascaffold from the output of 3D-DNA. After manual review, the megascaffold is split visually into chromsome-level scaffolds according to the HiC contact pattern.
+
+Showcase of file name of scaffold assembly before and after the manual curation
+```
+```
+
