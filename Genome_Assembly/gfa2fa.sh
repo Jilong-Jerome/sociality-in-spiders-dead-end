@@ -1,0 +1,1 @@
+awk '/^S/{print ">"$2"\n"$3}' /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/hifi_asm/MIM_hifi.asm.bp.p_ctg.gfa > /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/hifi_asm/MIM_hifi.asm.bp.p_ctg.fa

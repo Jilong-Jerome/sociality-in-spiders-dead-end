@@ -1,21 +1,9 @@
-# sociality-in-spiders-dead-end
-Pipelines and scripts for data analysis of the project "Sociality in spiders is an evolutionary dead end"
+# Genome assembly
 
-## Genome Assembly
-### Hifiasm
-### 3D-DNA scaffolding
+## Hifiasm
+We used Pacbio HiFi long reads and HiC sequence for each species as the input for Hifiasm.
 
-## Genome Annotation
-### RepeatModeling and Repeatmasking
-### RNA-seq alignment
-### BRAKER
-### Gene Synteny
+The output of Hifiasm is two assembly graphs in GFA format, each represent a haplotype.
 
-## dN/dS estimation
-### Orthogroups filtering
-### PAML branch-wise dN/dS
-### PAML pairwise dN/dS
-
-## PSMC
-
-## Codes for plotting
+We use awk to retrive the fasta sequence from the GFA file of the longer haplotype
+## 3D-DNA scaffolding

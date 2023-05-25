@@ -1,7 +1,7 @@
 # sociality-in-spiders-dead-end
 Pipelines and scripts for data analysis of the project "Sociality in spiders is an evolutionary dead end"
 
-## Genome Assembly[https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/README.md]
+## [Genome Assembly](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/README.md)
 ### Hifiasm
 ### 3D-DNA scaffolding
 
