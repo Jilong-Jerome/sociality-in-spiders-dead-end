@@ -7,7 +7,7 @@ The output of Hifiasm is two assembly graphs in GFA format, each represent a hap
 
 The workflow for all species is attached [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/workflow.py)
 
-Showcase using S.dumicola as an example
+Showcase using *S.dumicola* as an example
 ```
 #Specifying path to HiFi reads, HiC reads and results output 
 hifi_fq = "/home/jilong/spider2/faststorage/social_spiders_2020/data/BACKUP/Pacbio_Hifi/DUM/DUM_HiFi.fastq"
@@ -19,5 +19,10 @@ hic_R2 = "/home/jilong/spider2/faststorage/social_spiders_2020/data/BACKUP/Hi-C/
 hifiasm -o {hifi_out} -t32 --h1 {hic_1} --h2 {hic_2} {hifi_reads}
 
 ```
-We use awk to retrive the fasta sequence from the GFA file of the longer haplotype
+We use awk to retrive the fasta sequence from the GFA file of the longer haplotype resloved.
+
+Showcase using *S.dumicola* as an example
+```
+awk '/^S/{print ">"$2"\n"$3}' /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/hifi_asm/DUM/DUM_hifi.tmp.hic.hap2.p_ctg.gfa > /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/hifi_asm/DUM/DUM_hifi.tmp.hic.hap2.p_ctg.fa
+```
 ## 3D-DNA scaffolding
