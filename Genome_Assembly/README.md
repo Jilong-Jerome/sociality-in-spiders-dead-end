@@ -5,7 +5,7 @@ We used Pacbio HiFi long reads and HiC sequence for each species as the input fo
 
 The output of Hifiasm is two assembly graphs in GFA format, each represent a haplotype.
 
-The workflow for all species is attached [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/workflow.py)
+The workflow for all species is in the attached [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/workflow.py)
 
 Showcase using *S.dumicola* as an example
 ```
