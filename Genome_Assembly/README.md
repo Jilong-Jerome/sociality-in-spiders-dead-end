@@ -39,3 +39,22 @@ fasta = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/step
 #Run Juicer pipeline
 /home/jilong/software/juicer/scripts/juicer.sh -d /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/{species} -D /home/jilong/software/juicer -p /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/{species}/chrom.sizes -s none -z {fasta} -q short -Q 12:00:00 -l normal -L 24:00:00 -t 36 > {species}_juicer.log
 ```
+
+2.We use the Juicer alignment and the contigs fasta as the input for 3D-DNA scaffolding pipeline. 
+
+Showcase of the setting parameters for Juicer aligning process
+```
+# Specifiying inputs
+folder = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/DUM/3d_dna"
+species = "DUM"
+fasta = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/DUM/reference/DUM_hifi.tmp.hic.hap2.p_ctg.fa"
+merged = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/DUM/aligned/merged_nodups.txt"
+r = 0
+
+#Run 3D_DNA assemblign process
+mkdir -p {folder}
+cd {folder}
+export _JAVA_OPTIONS=-Djava.io.tmpdir=/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/tmp
+/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/3d_dna/3d-dna/run-asm-pipeline.sh -r {r} --early-exit --editor-repeat-coverage 30 --editor-coarse-stringency 20 --splitter-input-size 500000 --splitter-coarse-resolution 500000 --splitter-coarse-stringency 20 {fasta} {merged} > {folder}/{species}_3ddna.log.tmp
+mv {folder}/{species}_3ddna.log.tmp {folder}/{species}_3ddna.log
+```
