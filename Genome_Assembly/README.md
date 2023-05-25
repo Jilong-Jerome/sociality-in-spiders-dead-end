@@ -59,9 +59,13 @@ export _JAVA_OPTIONS=-Djava.io.tmpdir=/home/jilong/spider2/faststorage/social_sp
 mv {folder}/{species}_3ddna.log.tmp {folder}/{species}_3ddna.log
 ```
 
-3. After 3D-DNA scaffolding process, we manually review and curate the contigs orders and orientation in the megascaffold from the output of 3D-DNA. After manual review, the megascaffold is split visually into chromsome-level scaffolds according to the HiC contact pattern.
+3. After 3D-DNA scaffolding process, we manually review and curate the contigs orders and orientation in the megascaffold from the output of 3D-DNA. After manual review in Juicebox, the megascaffold is split visually into chromsome-level scaffolds according to the HiC contact pattern.
 
 Showcase of file name of scaffold assembly before and after the manual curation
 ```
+#The megascaffold from 3D-DNA scaffolding, without rounds of misjoint correction.
+DUM_hifi.tmp.hic.hap2.p_ctg.0.assembly
+#After manual curation
+DUM_hifi.tmp.hic.hap2.p_ctg.0.review.assembly
 ```
 
