@@ -40,7 +40,7 @@ fasta = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/step
 /home/jilong/software/juicer/scripts/juicer.sh -d /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/{species} -D /home/jilong/software/juicer -p /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/{species}/chrom.sizes -s none -z {fasta} -q short -Q 12:00:00 -l normal -L 24:00:00 -t 36 > {species}_juicer.log
 ```
 
-2.We use the Juicer alignment and the contigs fasta as the input for 3D-DNA scaffolding pipeline. 
+2. We use the Juicer alignment and the contigs fasta as the input for 3D-DNA scaffolding pipeline. 
 
 Showcase of the setting parameters for Juicer aligning process
 ```
@@ -69,3 +69,19 @@ DUM_hifi.tmp.hic.hap2.p_ctg.0.assembly
 DUM_hifi.tmp.hic.hap2.p_ctg.0.review.assembly
 ```
 
+4. We use the manual reviewd assembly to finalize scafflod fasta sequence with 3D-DNA post-review pipeline.
+Showcase of exporting the fasta sequence of each chromsome-level scaffold for *S.dumicola*
+
+```
+#Specifying inputs
+review = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/DUM/3d_dna/DUM_hifi.tmp.hic.hap2.p_ctg.0.review.assembly"
+draft = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/DUM/reference/DUM_hifi.tmp.hic.hap2.p_ctg_wrapped.fa"
+merged = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/DUM/aligned/merged_nodups.txt"
+folder = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/final_3d/DUM"
+species = "DUM"
+# Run 3D-DNA post-review for finalizing the reference output
+cd {folder}
+export _JAVA_OPTIONS=-Djava.io.tmpdir=/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/tmp
+/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/3d_dna/3d-dna/run-asm-pipeline-post-review.sh --build-gapped-map --sort-output -s finalize -r {review} {draft} {merged} > {folder}/{species}_export.log.tmp
+mv {folder}/{species}_export.log.tmp {folder}/{species}_export.log
+```
