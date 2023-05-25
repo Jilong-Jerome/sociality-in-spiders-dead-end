@@ -5,7 +5,7 @@
 
 The output of Hifiasm is two assembly graphs in GFA format, each represent a haplotype.
 
-The workflow in gwf for analysising all species is in the attached [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/workflow.py)
+The workflow in gwf for analysising all species is in the attached [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/hifiasm/workflow.py)
 
 Showcase using *S.dumicola* as an example
 ```
