@@ -1,7 +1,7 @@
 # Genome assembly
 
 ## Hifiasm
-We used Pacbio HiFi long reads and HiC sequence for each species as the input for Hifiasm.
+1. We used Pacbio HiFi long reads and HiC sequence for each species as the input for Hifiasm.
 
 The output of Hifiasm is two assembly graphs in GFA format, each represent a haplotype.
 
@@ -19,7 +19,7 @@ hic_R2 = "/home/jilong/spider2/faststorage/social_spiders_2020/data/BACKUP/Hi-C/
 hifiasm -o {hifi_out} -t32 --h1 {hic_1} --h2 {hic_2} {hifi_reads}
 
 ```
-We use awk to retrive the fasta sequence from the GFA file of the longer haplotype resloved.
+2. We use awk to retrive the fasta sequence from the GFA file of the longer haplotype resloved.
 
 Showcase using *S.dumicola* as an example
 ```
