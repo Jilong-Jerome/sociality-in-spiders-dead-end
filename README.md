@@ -10,6 +10,7 @@ We use [Juicer](https://www.sciencedirect.com/science/article/pii/S2405471216302
 
 ## Genome Annotation
 ### RepeatModeling and Repeatmasking
+We use RepeatModeler2 to generate repeat library for each species. Species-specific repeat library is combined with the Arthropoda repeat libraray from Repbase for RepeatMasker to mask the reference genome of each specices.
 ### RNA-seq alignment
 ### BRAKER
 ### Gene Synteny
