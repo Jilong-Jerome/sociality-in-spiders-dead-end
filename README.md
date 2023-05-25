@@ -3,6 +3,7 @@ Pipelines and scripts for data analysis of the project "Sociality in spiders is 
 
 ## [Genome Assembly](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/README.md)
 ### Hifiasm
+We use [hifiasm](https://www.nature.com/articles/s41592-020-01056-5) version 0.16.1-r375 to assemble inital halpotype-resolved contigs with Pacbio HiFi long reads and the HiC reads
 ### 3D-DNA scaffolding
 
 ## Genome Annotation
