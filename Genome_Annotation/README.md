@@ -66,7 +66,7 @@ Showcase of the workflow
 ### Evidence from protein homology
 1. For protein homology evidence, we used protein sequence from a previous [S.dumicola annotation from NCBI](https://www.ncbi.nlm.nih.gov/genome/annotation_euk/Stegodyphus_dumicola/100/) and [arthropoda protein from OrthoDB v10](https://academic.oup.com/nar/article/47/D1/D807/5160989)
 
-### BRAKER
+## BRAKER
 
 1. We split the chromosome-level assemblies into single chromosome to be ran through the BRAKER pipeline.
 
@@ -85,4 +85,20 @@ braker.pl --species={aug_sp} --genome={genome} --prot_seq={protein} --bam {bam} 
 # Combine BRAKER results for species annotations
 cat {string_gff} > {sp}_braker.gff3
 ```
+### Special Cases
+#### HiC_scaffold_11 of *S.dumicola"
+We run BRAKER2 with only uning hints from transcriptome on the whole genome of *S.dumicola*, then we retreive only the gene predicted with full support from transcriptome data.
+Example codes
+```
+# Run BRAKER RNA mode
+path = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/annotate/braker/dumicola/rna_mode"
+genome = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/annotate/repeat_masker/DUM/RMdatabase/combine/DUM_hifi_hic_scaffolded_trim.fa.masked"
+bam = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/RNA_analysis/STAR/DUM_RNA_STAR_sort.bam"
+braker.pl --species={species} --genome={genome} --bam={bam} --softmasking on --cores=24 --gff3
 
+#Check the supports of gene hints from transcriptome
+gtf = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/annotate/braker/dumicola/rna_mode/braker/dumicola_braker_rna/augustus.gtf"
+hint = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/annotate/braker/dumicola/rna_mode/braker/dumicola_braker_rna/hintsfile.gff"
+path = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/annotate/braker/dumicola/rna_mode/braker/dumicola_braker_rna/support"
+/home/jilong/software/BRAKER/scripts/predictionAnalysis/selectSupportedSubsets.py {gtf} {hint} --fullSupport full --anySupport any --noSupport no
+```
