@@ -15,6 +15,10 @@ We use [RepeatModeler2](https://www.pnas.org/doi/10.1073/pnas.1921046117) to gen
 ### RNA-seq alignment
 We use [STAR](https://github.com/alexdobin/STAR) to align RNA-seq to each species reference genome as hints for gene prediction from transcriptome.
 ### BRAKER
+We ran BRAKER2 pipeline to do gene prediction using hints from RNA transcriptome and protein homology simultaneously for each chromosome of each species separtely. Then the results from chromosmes are combined into species annotations.
+
+Special cases were handled for HiC_scaffold_11 of *S.dumicola* and half of the HiC_scaffold_16 of *S.mimosarum*, where we failed to ran BRAKER ETP mode thourgh them.
+
 ### Gene Synteny
 
 ## dN/dS estimation
