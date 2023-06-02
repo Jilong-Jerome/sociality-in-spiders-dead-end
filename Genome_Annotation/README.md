@@ -102,3 +102,7 @@ hint = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps
 path = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/annotate/braker/dumicola/rna_mode/braker/dumicola_braker_rna/support"
 /home/jilong/software/BRAKER/scripts/predictionAnalysis/selectSupportedSubsets.py {gtf} {hint} --fullSupport full --anySupport any --noSupport no
 ```
+#### Half of HiC_scaffold_16 of *S.mimosarum*
+We take the mRNA sequence from the HiC_sacffold_16's homologous chromsome in *S.bicolor*. We did a blat search for the hits of mRNA sequence in HiC_scaffold_16 as hints for [AUGUSTUS](https://github.com/Gaius-Augustus/Augustus) gene prediction.
+
+The full workflow for this can be found in workflow.py
