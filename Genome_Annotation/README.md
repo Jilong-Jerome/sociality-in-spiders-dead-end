@@ -86,7 +86,7 @@ braker.pl --species={aug_sp} --genome={genome} --prot_seq={protein} --bam {bam} 
 cat {string_gff} > {sp}_braker.gff3
 ```
 ### Special Cases
-#### HiC_scaffold_11 of *S.dumicola"
+#### HiC_scaffold_11 of *S.dumicola*
 We run BRAKER2 with only uning hints from transcriptome on the whole genome of *S.dumicola*, then we retreive only the gene predicted with full support from transcriptome data.
 Example codes
 ```
