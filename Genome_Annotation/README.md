@@ -66,3 +66,23 @@ Showcase of the workflow
 ### Evidence from protein homology
 1. For protein homology evidence, we used protein sequence from a previous [S.dumicola annotation from NCBI](https://www.ncbi.nlm.nih.gov/genome/annotation_euk/Stegodyphus_dumicola/100/) and [arthropoda protein from OrthoDB v10](https://academic.oup.com/nar/article/47/D1/D807/5160989)
 
+### BRAKER
+
+1. We split the chromosome-level assemblies into single chromosome to be ran through the BRAKER pipeline.
+
+Showcase of the chromsome splitting
+```
+seqkit grep -p HiC_scaffold_{chrom_id} {genome} -o {out}
+```
+
+2. We ran BRAKER2 pipe line on each single chromsomes, with the RNA alignment bam file and the comined protein sequence fasta as hints for gene prediction.
+
+Showcase of running BRAKER2 in ETP mode (taking transcriptome and protein homology evidence at the same time).
+```
+# Run BRAKER2 for each chromosomes
+braker.pl --species={aug_sp} --genome={genome} --prot_seq={protein} --bam {bam} --etpmode --softmasking --cores=12 --gff3
+
+# Combine BRAKER results for species annotations
+cat {string_gff} > {sp}_braker.gff3
+```
+
