@@ -35,61 +35,34 @@ RepeatMasker -e ncbi -pa 24 -xsmall -dir {path} -lib {lib} {fasta}
 
 ### Evidence from RNA-seq
 
-The workflow in gwf for aVnalysising all species is in the attached [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/hic_scaffold/workflow.py)
+1. We use STAR to align RNA-seq from single individual to the softmasked species reference genome.
 
-1. First we index the contig fasta files with bwa and use the [Juicer](https://github.com/aidenlab/juicer) pipeline to aligned paired sequenced HiC reads to the indexed contigs. 
-
-Showcase of the setting parameters for Juicer aligning process
-```
-#Specifiying species name and hifiasm assembled contigs
-species = "DUM"
-fasta = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/DUM/reference/DUM_hifi.tmp.hic.hap2.p_ctg.fa"
-#Run Juicer pipeline
-/home/jilong/software/juicer/scripts/juicer.sh -d /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/{species} -D /home/jilong/software/juicer -p /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/{species}/chrom.sizes -s none -z {fasta} -q short -Q 12:00:00 -l normal -L 24:00:00 -t 36 > {species}_juicer.log
+Showcase of the workflow to align individuals of a single species.
 ```
 
-2. We use the Juicer alignment and the contigs fasta as the input for 3D-DNA scaffolding pipeline. 
+# indexing genome using STAR
+STAR --runThreadN 18 --runMode genomeGenerate --genomeDir {path} --genomeFastaFiles {ref}
 
-Showcase of the setting parameters for Juicer aligning process
-```
-# Specifiying inputs
-folder = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/DUM/3d_dna"
-species = "DUM"
-fasta = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/DUM/reference/DUM_hifi.tmp.hic.hap2.p_ctg.fa"
-merged = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/DUM/aligned/merged_nodups.txt"
-r = 0
+# Setting inputs
+for ind in sp_dict: 
+    fq1 = sp_dict[ind][0] 
+    fq2 = sp_dict[ind][1] 
+    indname = ind.replace("-","_") 
 
-#Run 3D_DNA assemblign process
-mkdir -p {folder}
-cd {folder}
-export _JAVA_OPTIONS=-Djava.io.tmpdir=/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/tmp
-/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/3d_dna/3d-dna/run-asm-pipeline.sh -r {r} --early-exit --editor-repeat-coverage 30 --editor-coarse-stringency 20 --splitter-input-size 500000 --splitter-coarse-resolution 500000 --splitter-coarse-stringency 20 {fasta} {merged} > {folder}/{species}_3ddna.log.tmp
-mv {folder}/{species}_3ddna.log.tmp {folder}/{species}_3ddna.log
+# Run STAR mapping
+STAR --genomeDir {index_path} --runThreadN 16 --readFilesCommand zcat --readFilesIn {fq1} {fq2} --outSAMattrRGline ID:{indname} --outFileNamePrefix {align_path}/{indname}/{indname} --outSAMtype BAM SortedByCoordinate --outReadsUnmapped Fastx
 ```
+2. We use samtools to merge and sort the individal bam files into one single bam file for each species. 
 
-3. After 3D-DNA scaffolding process, we manually review and curate the contigs orders and orientation in the megascaffold from the output of 3D-DNA. After manual review in Juicebox, the megascaffold is split visually into chromsome-level scaffolds according to the HiC contact pattern.
+Showcase of the workflow
+```
+# Merge bams
+/home/jilong/software/samtools-1.12/samtools merge -@ 16 -O BAM {path}/{outname}.bam {files}
+# Sort reads
+/home/jilong/software/samtools-1.12/samtools sort -@ 16 -O BAM -o {bam_out}.bam {bam_in}.bam
+# Index bam
+/home/jilong/software/samtools-1.12/samtools index -@ 16 -b {bam_out}.bam {bam_out}.bai
+```
+### Evidence from protein homology
+1. For protein homology evidence, we used protein sequence from a previous [S.dumicola annotation from NCBI](https://www.ncbi.nlm.nih.gov/genome/annotation_euk/Stegodyphus_dumicola/100/) and [arthropoda protein from OrthoDB v10](https://academic.oup.com/nar/article/47/D1/D807/5160989)
 
-Showcase of file name of scaffold assembly before and after the manual curation
-```
-#The megascaffold from 3D-DNA scaffolding, without rounds of misjoint correction.
-DUM_hifi.tmp.hic.hap2.p_ctg.0.assembly
-#After manual curation
-DUM_hifi.tmp.hic.hap2.p_ctg.0.review.assembly
-```
-
-4. We use the manual reviewd assembly to finalize scafflod fasta sequence with 3D-DNA post-review pipeline.
-Showcase of exporting the fasta sequence of each chromsome-level scaffold for *S.dumicola*
-
-```
-#Specifying inputs
-review = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/DUM/3d_dna/DUM_hifi.tmp.hic.hap2.p_ctg.0.review.assembly"
-draft = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/DUM/reference/DUM_hifi.tmp.hic.hap2.p_ctg_wrapped.fa"
-merged = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/DUM/aligned/merged_nodups.txt"
-folder = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/final_3d/DUM"
-species = "DUM"
-# Run 3D-DNA post-review for finalizing the reference output
-cd {folder}
-export _JAVA_OPTIONS=-Djava.io.tmpdir=/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/tmp
-/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/3d_dna/3d-dna/run-asm-pipeline-post-review.sh --build-gapped-map --sort-output -s finalize -r {review} {draft} {merged} > {folder}/{species}_export.log.tmp
-mv {folder}/{species}_export.log.tmp {folder}/{species}_export.log
-```
