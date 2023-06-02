@@ -1,33 +1,41 @@
-# Genome assembly
+# Genome annotation
 
-## Hifiasm
-1. We used Pacbio HiFi long reads and HiC sequence for each species as the input for Hifiasm.
-
-The output of Hifiasm is two assembly graphs in GFA format, each represent a haplotype.
+## Repeatmasking
+1. We used RepeatModeler2 to model a species-specfic repeat liberay from the scaffolded chromosome-level assembly.
 
 The workflow in gwf for analysising all species is in the attached [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/hifiasm/workflow.py)
 
-Showcase using *S.dumicola* as an example
+Showcase using *S.sarasinorum* as an example
 ```
-#Specifying path to HiFi reads, HiC reads and results output 
-hifi_fq = "/home/jilong/spider2/faststorage/social_spiders_2020/data/BACKUP/Pacbio_Hifi/DUM/DUM_HiFi.fastq"
-hifi_out = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/hifi_asm/DUM/DUM_hifi"
-hic_R1  ="/home/jilong/spider2/faststorage/social_spiders_2020/data/BACKUP/Hi-C/Sdum_OmniC_lib2/211104_X600_FCHH2WHCCX2_L4_CHKPE85221100091_1.fq"
-hic_R2 = "/home/jilong/spider2/faststorage/social_spiders_2020/data/BACKUP/Hi-C/Sdum_OmniC_lib2/211104_X600_FCHH2WHCCX2_L4_CHKPE85221100091_2.fq"
+#Specifying path to species genome and results output 
+sp = "SARA"
+out = sp
+genome = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/final_3d/{sp}/{sp}_hifi_hic_scaffolded_trim.fa".format(sp=sp)
 
-# Run hifiasm
-hifiasm -o {hifi_out} -t32 --h1 {hic_1} --h2 {hic_2} {hifi_reads}
-
+# Run RepeatModeler
+BuildDatabase -name {out} -engine ncbi {genome}
+RepeatModeler -pa 24 -engine ncbi -database {out}
 ```
-2. We use awk to retrive the fasta sequence from the GFA file of the longer haplotype resloved.
+2. The arthropoda repeat library from Repbase and the modeled species-specific library are combined as the repeat library input for RepeatMasker to do soft-masking.
 
-Showcase using *S.dumicola* as an example
+Showcase using *S.sarasinorum* as an example
 ```
-awk '/^S/{print ">"$2"\n"$3}' /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/hifi_asm/DUM/DUM_hifi.tmp.hic.hap2.p_ctg.gfa > /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/hifi_asm/DUM/DUM_hifi.tmp.hic.hap2.p_ctg.fa
-```
-## 3D-DNA scaffolding
+#Prepare inputs
+sp = "SARA"
+genome = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/final_3d/{sp}/{sp}_hifi_hic_scaffolded_trim.fa".format(sp=sp)
+lib1 = "/home/jilong/spider2/faststorage/social_spiders_2020/data/public_data/repbase/repbase_arthropoda.fa"
+lib2 = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/full_annotation/{sp}/repeat_masker/model/{sp}-families.fa".format(sp=sp)
+lib = "{sp}_repbase.fa".format(sp=sp)
 
-The workflow in gwf for analysising all species is in the attached [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/hic_scaffold/workflow.py)
+#Run RepeatMasker (softmasking)
+cat {lib1} {lib2} > {lib}
+RepeatMasker -e ncbi -pa 24 -xsmall -dir {path} -lib {lib} {fasta}
+```
+## Gathering evidence for gene prediction
+
+### Evidence from RNA-seq
+
+The workflow in gwf for aVnalysising all species is in the attached [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/hic_scaffold/workflow.py)
 
 1. First we index the contig fasta files with bwa and use the [Juicer](https://github.com/aidenlab/juicer) pipeline to aligned paired sequenced HiC reads to the indexed contigs. 
 
