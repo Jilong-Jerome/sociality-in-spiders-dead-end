@@ -11,7 +11,7 @@ We use [Juicer](https://www.sciencedirect.com/science/article/pii/S2405471216302
 ## [Genome Annotation](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Annotation/README.md)
 Please see details in [Genome Annotation](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Annotation/README.md)
 ### RepeatModeling and Repeatmasking
-We use [RepeatModeler2](https://www.pnas.org/doi/10.1073/pnas.1921046117) to generate repeat library for each species. Species-specific repeat library is combined with the Arthropoda repeat library from Repbase for RepeatMasker to mask the reference genome of each specices.
+We use [RepeatModeler2](https://www.pnas.org/doi/10.1073/pnas.1921046117) to generate repeat library for each species. Species-specific repeat library is combined with the Arthropoda repeat library from [Repbase](https://www.girinst.org/repbase/) for [RepeatMasker](https://www.repeatmasker.org) to mask the reference genome of each specices.
 ### RNA-seq alignment
 We use [STAR](https://github.com/alexdobin/STAR) to align RNA-seq to each species reference genome as hints for gene prediction from transcriptome.
 ### BRAKER
