@@ -114,5 +114,5 @@ We take the mRNA sequence from the HiC_sacffold_16's homologous chromsome in *S.
 ## Gene Synteny
 The workflow for GENESPACE analysis can be found in [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Annotation/genespace/workflow.py)
 
-The GENESPACE require the genome annotation file in GFF3 and protein sequence fasta file from all species as the input.
+The GENESPACE require the genome annotation file in GFF3 and protein sequence fasta file from all the six species with chromosome level assemblies as the input.
 
