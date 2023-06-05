@@ -35,7 +35,7 @@ For *S.africanus*, where we have only RNA-seq, we use Trinity to assemble transc
 #### *S.pacificus*
 For *S.pacificus*, we align the short DNA-seq to the reference genome of *S.sarasinorum*, which is the closest species to *S.pacificus*. We create a consensus reference sequence for *S.pacificus* based on the alignment. The genes belonging to a certain single-copy ortholog groups are retreived based on genome annotation of *S.sarasinorum*
 
-#### Alignment
+### Alignment
 We use [MACSEv2](https://academic.oup.com/mbe/article/35/10/2582/5079334) to align the retrive coding region of single-copy orthologs across all 8 species. The alignment is further filtered for continious size and fraction of polymorphisim of local alignment blocks to avoid artefact from local mis-alignments. The final alignments of each single-copy orthologs is converted into phylip format with BioPython for further analysis.
 
 ### PAML branch-wise dN/dS
