@@ -90,6 +90,8 @@ cat {string_gff} > {sp}_braker.gff3
 ```
 ### Special Cases
 #### HiC_scaffold_11 of *S.dumicola*
+The workflow of this special case can be found at [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Annotation/DUM_11/workflow.py)
+
 We run BRAKER2 with only uning hints from transcriptome on the whole genome of *S.dumicola*, then we retreive only the gene predicted with full support from transcriptome data.
 Example codes
 ```
@@ -106,6 +108,7 @@ path = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps
 /home/jilong/software/BRAKER/scripts/predictionAnalysis/selectSupportedSubsets.py {gtf} {hint} --fullSupport full --anySupport any --noSupport no
 ```
 #### Half of HiC_scaffold_16 of *S.mimosarum*
+The workflow of this special case can be found at [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Annotation/MIM_16/workflow.py)
 We take the mRNA sequence from the HiC_sacffold_16's homologous chromsome in *S.bicolor*. We did a blat search for the hits of mRNA sequence in HiC_scaffold_16 as hints for [AUGUSTUS](https://github.com/Gaius-Augustus/Augustus) gene prediction.
 
 The full workflow for this can be found in workflow.py
