@@ -111,4 +111,8 @@ path = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps
 The workflow of this special case can be found at [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Annotation/MIM_16/workflow.py)
 We take the mRNA sequence from the HiC_sacffold_16's homologous chromsome in *S.bicolor*. We did a blat search for the hits of mRNA sequence in HiC_scaffold_16 as hints for [AUGUSTUS](https://github.com/Gaius-Augustus/Augustus) gene prediction.
 
-The full workflow for this can be found in workflow.py
+## Gene Synteny
+The workflow for GENESPACE analysis can be found in [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Annotation/genespace/workflow.py)
+
+The GENESPACE require the genome annotation file in GFF3 and protein sequence fasta file from all species as the input.
+
