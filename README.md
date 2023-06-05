@@ -22,7 +22,7 @@ Special cases were handled for HiC_scaffold_11 of *S.dumicola* and half of the H
 The final species annotation completeness is checked with [BUSCO](https://busco.ezlab.org) together with a set of 1013 Arthropoda genes from OrthoDB v10.
 ### Gene Synteny
 We use [GENESPACE](https://github.com/jtlovell/GENESPACE) to plot the gene synteny across our *de novo* assemblies. During the GENESPACE analysis, [OrthoFinder](https://github.com/davidemms/OrthoFinder) was performed for finding ortholougous groups among the six species: *S.lineatus*, *S.mimosarum*, *S.dumicola*, *S.tentoriicola*, *S.sarasinorum* and *S.bicolor*. 
-## dN/dS estimation
+## [dN/dS estimation]((https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/README.md))
 Please see details in [dN/dS estimation](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/README.md) page. 
 ### Orthogroups filtering
 ### PAML branch-wise dN/dS
