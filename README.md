@@ -25,7 +25,16 @@ We use [GENESPACE](https://github.com/jtlovell/GENESPACE) to plot the gene synte
 
 ## [dN/dS estimation](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/README.md)
 Please see details in [dN/dS estimation](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/README.md) page. 
+
 ### Orthogroups filtering
+After GENESPACE/OrthoFinder, we obtained the single-copy orthologs across the 6 species where we have chromosome level assemblies. To integrate the RNA-seq from *S.africanus* and short DNA-seq from *S.pacificus*, we apply extra steps to filter and prepare high-quality codon-alignment across all the 8 species.
+
+####*S.africanus*
+For *S.africanus*, where we have onlyl RNA-seq, we use Trinity to assemble transcripts from the RNA-seq. The assembled transcripts are aligned to all the single-copy orthologs found in the 6 species with chromosome-level assemblies. Every single-copy orthologs that obtained a hit in the assembled transcripts with an anverage simialrity over 75% is kept.
+
+####*S.pacificus*
+For *S.pacificus*, we align the short DNA-seq to the reference genome of *S.sarasinorum*, which is the closest species to *S.pacificus*. We create a consensus reference sequence for *S.pacificus* based on the alignment. The genes belonging to a certain single-copy ortholog groups are retreived based on genome annotation of *S.sarasinorum*
+
 ### PAML branch-wise dN/dS
 ### PAML pairwise dN/dS
 
