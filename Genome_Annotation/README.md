@@ -3,7 +3,7 @@
 ## Repeatmasking
 1. We used RepeatModeler2 to model a species-specfic repeat liberay from the scaffolded chromosome-level assembly.
 
-The workflow in gwf for analysising all species is in the attached [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/hifiasm/workflow.py)
+The workflow in gwf for analysising all species is in the attached [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Annotation/repeat_masking/workflow.py)
 
 Showcase using *S.sarasinorum* as an example
 ```
@@ -34,6 +34,7 @@ RepeatMasker -e ncbi -pa 24 -xsmall -dir {path} -lib {lib} {fasta}
 ## Gathering evidence for gene prediction
 
 ### Evidence from RNA-seq
+The workflow in gwf for analysising all species is in the attached [workflow_RNA.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Annotation/DUM_TENT_LIN/workflow_RNA.py)(*S.dumicola*,*S.tentoriicola*,*S.lineatus*) and [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Annotation/SARA_MIM_BI/workflow.py)(*S.bicolor*,*S.sarasinorum*,*S.mimosarum*)
 
 1. We use STAR to align RNA-seq from single individual to the softmasked species reference genome.
 
@@ -67,6 +68,8 @@ Showcase of the workflow
 1. For protein homology evidence, we used protein sequence from a previous [S.dumicola annotation from NCBI](https://www.ncbi.nlm.nih.gov/genome/annotation_euk/Stegodyphus_dumicola/100/) and [arthropoda protein from OrthoDB v10](https://academic.oup.com/nar/article/47/D1/D807/5160989)
 
 ## BRAKER
+
+The workflow in gwf for analysising all species is in the attached [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Annotation/DUM_TENT_LIN/workflow.py)(*S.dumicola*,*S.tentoriicola*,*S.lineatus*) and [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Annotation/SARA_MIM_BI/workflow.py)(*S.bicolor*,*S.sarasinorum*,*S.mimosarum*)
 
 1. We split the chromosome-level assemblies into single chromosome to be ran through the BRAKER pipeline.
 
