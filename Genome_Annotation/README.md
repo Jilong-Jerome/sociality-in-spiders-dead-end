@@ -111,6 +111,19 @@ path = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps
 The workflow of this special case can be found at [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Annotation/MIM_16/workflow.py)
 We take the mRNA sequence from the HiC_sacffold_16's homologous chromsome in *S.bicolor*. We did a blat search for the hits of mRNA sequence in HiC_scaffold_16 as hints for [AUGUSTUS](https://github.com/Gaius-Augustus/Augustus) gene prediction.
 
+## BUSCO
+We retrive protein sequence data for all species from their genome annotation files. The completenss of the genome annotation is evaluated using BUSCO together with a set of 1013 *Arthropoda* genes from OrthoDB v10.
+Example codes
+```
+protein_fasta = "/home/jilong/spider2/faststorage/social_spiders_2020/data/BACKUP/BRAKER_annotation/peptide/SARA.fa"
+path = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/annotate/braker/sarasinorum/etp_mode/braker_busco/SARA"
+outname = "SARA_braker_etp_mode"
+
+mkdir -p {path}
+cd {path}
+busco -i {maker_fasta} -o {outname} -l arthropoda_odb10 -m proteins -c 16 -f
+```
+Full worklfow for BUSCO checking can be found at [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Annotation/busco/workflow.py)
 ## Gene Synteny
 The workflow for GENESPACE analysis can be found in [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Annotation/genespace/workflow.py)
 
