@@ -23,7 +23,6 @@ The final species annotation completeness is checked with [BUSCO](https://busco.
 ### Gene Synteny
 We use [GENESPACE](https://github.com/jtlovell/GENESPACE) to plot the gene synteny across our *de novo* assemblies. During the GENESPACE analysis, [OrthoFinder](https://github.com/davidemms/OrthoFinder) was performed for finding ortholougous groups among the six species: *S.lineatus*, *S.mimosarum*, *S.dumicola*, *S.tentoriicola*, *S.sarasinorum* and *S.bicolor*. 
 ## dN/dS estimation
-Please see details in [dN/dS estimation](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/README.md) page. 
 ### Orthogroups filtering
 ### PAML branch-wise dN/dS
 ### PAML pairwise dN/dS
