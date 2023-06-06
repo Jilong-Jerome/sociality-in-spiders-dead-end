@@ -46,6 +46,11 @@ We start with mapping reads from each population to the species reference genome
  
 We random select 500, 100 genes out of the 2302 autosomal genes, 347 X chromosome genes for 500 times. In each bootstrapping, sequence of the coding region from the selected genes were retrived and concatenated from the two population reference genome as the input for CodeML in PAML to do pair-wise dN/dS estimation.
 
+### Solving for social transition time
+
+### Species divergence time
+
 ## PSMC
+
 
 ## Codes for plotting
