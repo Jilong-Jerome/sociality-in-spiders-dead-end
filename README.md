@@ -39,7 +39,12 @@ For *S.pacificus*, we align the short DNA-seq to the reference genome of *S.sara
 We use [MACSEv2](https://academic.oup.com/mbe/article/35/10/2582/5079334) to align the retrive coding region of single-copy orthologs across all 8 species. The alignment is further filtered for continious size and fraction of polymorphisim of local alignment blocks to avoid artefact from local mis-alignments. The final alignments of each single-copy orthologs is converted into phylip format with BioPython for further analysis.
 
 ### PAML branch-wise dN/dS
+We random select 500, 100 genes out of the 2302 autosomal genes, 347 X chromosome genes for 500 times. In each bootstrapping, the alignments of the selected genes were concatenated as the input for CodeML in PAML to do branch-wise dN/dS estimation.
+
 ### PAML pairwise dN/dS
+We start with mapping reads from each population to the species reference genomeand calling SNPs, a reference genome of each population is created by substituing the reference genome with alternative nucleotdie.
+ 
+We random select 500, 100 genes out of the 2302 autosomal genes, 347 X chromosome genes for 500 times. In each bootstrapping, sequence of the coding region from the selected genes were retrived and concatenated from the two population reference genome as the input for CodeML in PAML to do pair-wise dN/dS estimation.
 
 ## PSMC
 
