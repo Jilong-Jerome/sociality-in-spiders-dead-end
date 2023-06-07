@@ -39,4 +39,6 @@ diamond blastx -p 24 -k {n} -q {query} -d {db} -o {out}.tsv --ultra-sensitive
 3. After the Diamond blast, we matched the transcripts from *S.africanus* to the single copy orthologs found across the other six species. Length of the matched *S.africanus* transcripts and average transcript length of the orthologs is checked. For each *S.africanus* transcript, the longest alignment with any orthologs is kept and the alignment length should be over 200 amino acid. The sequence identity between *S.africanus* and other ortholog sequences are evaluated and a minmum threshold of 0.75 is applied for any matched *S.africanus* transcript to be valid.
 See complete codes in [og_filter.Rmd](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/AFR/og_filter.Rmd)
 
+![Length of *S.africanus* transcripts and thier corresponding average length of orthologs in six species with chromosome-level assemblies](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/AFR/afr_og_length_comparison.jpeg)
 
+![The distribution of sequence identity among blast hits longer than 200 amino acids](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/AFR/Distribution of sequence identity of AFR hits.jpeg)
