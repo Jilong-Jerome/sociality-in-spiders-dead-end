@@ -43,3 +43,7 @@ See complete codes in [og_filter.Rmd](https://github.com/Jilong-Jerome/sociality
 ![Length of *S.africanus* transcripts and thier corresponding average length of orthologs in six species with chromosome-level assemblies](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/AFR/afr_og_length_comparison.jpeg)
 #### Distribution of sequence identity among blast hits longer than 200 amino acids
 ![The distribution of sequence identity among blast hits longer than 200 amino acids](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/AFR/Distribution_of_sequence_identity_of_AFR_hits.jpeg)
+
+4. We created a consensus sequence reference from a single *S.pacificus* individual. We aligned the paird short reads from *S.pacificus* to the reference of *S.sarasinorum* and then called a consensus sequence ignoring the indels to keep the consensus reference at the same length with *S.sarasinorum* so that we can use the same annotation to retrive gene sequence.
+See complete codes in [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/PAC/workflow.py)
+
