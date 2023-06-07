@@ -53,3 +53,11 @@ See complete codes in [og_filter.Rmd](https://github.com/Jilong-Jerome/sociality
 
 See complete codes in [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/PAC/workflow.py)
 
+## Alignments
+
+### Multiple alignment of each single-copy orthologs across the 8 species in analysis
+
+ According to the above filtering, we ending up with a selection of ortholog groups that has a corresponding coding sequence in each species of all the eight species included in the analysis. We retrieve the relevant fasta coding sequence and create a multiple alignment for each selected ortholog using MACSE.
+
+See complete codes in [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/8_sp/workflow.py)
+
