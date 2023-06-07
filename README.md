@@ -58,10 +58,17 @@ The social transition time can be solved as following.
 ## [PSMC]((https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/PSMC/README.md))
 
 ### Creating pesuo-diploid for social species
+The PSMC method relies on a single diploid individual, where the social species runs out of heterozygosity due to inbreeding. We combine the DNA-seq of two individuals from two separate and diverged populations to retain the loss of heterozygosity.
 
 ### Running PSMC methods
+We follwing the process described in (https://informatics.fas.harvard.edu/psmc-journal-club-walkthrough.html) for our PSMC analysis of each species, separtely for autosomes and X chromosomes.
+
+We use different mutation rate for X chromosmes and autosomes given previous finding of lower mutation rate in X chromosmes. [Bechsgaard et.al 2019](https://academic.oup.com/mbe/article/36/6/1281/5420164)
 
 ### Calculating NeX/Ne_Auto
+To be able to calulate the ratio between effective population size from X chromosomes and autosomes, we need to fill empty values for either X chromsomes or autosomes for every time point estimated both PSMC results.
+
+The obtained Ne_X/Ne_Auto ratio curves are polished by fitting splines in R 
 
 ## Codes for plotting
 
