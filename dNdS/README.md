@@ -72,3 +72,10 @@ samtools consensus -a --show-del yes --show-ins no -f fasta -o {fasta_out} {bam_
 
 See complete codes in [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/8_sp/workflow.py)
 
+```
+# Prepare inputs
+group = #Orthologs ID#
+# Run samtools consensus
+macse -prog alignSequences -seq {group}_unalign.fasta -out_AA {group}_AA.fasta -out_NT {group}_NT.fasta -fs 10 -stop 10
+```
+
