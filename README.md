@@ -46,10 +46,14 @@ We start with mapping reads from each population to the species reference genome
  
 We random select 500, 100 genes out of the 2302 autosomal genes, 347 X chromosome genes for 500 times. In each bootstrapping, sequence of the coding region from the selected genes were retrived and concatenated from the two population reference genome as the input for CodeML in PAML to do pair-wise dN/dS estimation.
 
-### Solving for social transition time
+### Species divergence time and solving for social transition time
 
-### Species divergence time
+After we obtained the boostrapping results for branch-wise dN/dS and pair-wise dN/dS, we are equipped to solve the social transition time.
 
+The species divergence time is estimated according to the dS from boostrapped autosomal gene sets.
+
+The social transition time can be solved as following.
+![solving_time](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/solving_time.jpeg) 
 ## PSMC
 
 
