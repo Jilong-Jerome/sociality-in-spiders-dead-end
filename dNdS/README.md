@@ -171,5 +171,30 @@ python /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/script
 
 
 ## Pair-wise dN/dS estimation
+For each social species, we create two separate population reference using 1 single individual respectively. The pair-wise dN/dS estimation is performed with boostrapping, which resembles the branch-wise dN/dS process
 
+1. Create reference genome for two separate populations.
 
+We start with mapping a single individual from each population to the reference genome. We then call SNPs (ignoring indels) for each individual. The population reference is then created by substitute nucleotide at the SNP sites being the alternative nucleotide.
+
+Codes for alignment of single individual paird short read DNAseq can be found at [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/dna_align/workflow.py)
+
+Workflow for creating all population reference and retriveing coding sequence of orthologs can be found at [workflow.py](/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/PUB1_GENOME/dnds/population_dnds/workflow.py)
+#### Showcase of creating population reference
+```
+# Call variants
+platypus callVariants --bamFiles={bam} --refFile={ref} --output={name}.vcf
+
+# Remove indels
+vcftools --vcf {vcfin} --remove-indels --recode --out {vcfout}
+
+# Create new population reference
+bgzip -c {vcfin} > {name}.noindel.vcf.gz
+bcftools index {name}.noindel.vcf.gz
+bcftools consensus -f {refin} --sample {name} {name}.noindel.vcf.gz > {refout}
+
+# Retreive coding sequence from selected set of genes
+agat_sp_extract_sequences.pl -g {gffin} -f {refin} -t cds -o {faout}.temp 
+python /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/PUB1_GENOME/dnds/pep_reformat_sp.py {sp} {faout}.temp {faout}
+```
+ 
