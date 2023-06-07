@@ -139,7 +139,7 @@ conda activate clustalo
 trimal -in {out}.filtered.concat.phy -phylip3.2 -out {out}.filtered.concat.paml.phy
 ```
 
-### Running branch-wise dN/dS estimation in PAML
+## Branch-wise dN/dS estimation
 
 The concatenated alignments after filtering are ready for estimating dN/dS in branch-wise for all the branches in the phylogeny of 8 *Stegodyphus* species.
 
@@ -170,5 +170,6 @@ python /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/script
 ```
 
 
+## Pair-wise dN/dS estimation
 
 
