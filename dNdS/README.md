@@ -79,3 +79,6 @@ group = #Orthologs ID#
 macse -prog alignSequences -seq {group}_unalign.fasta -out_AA {group}_AA.fasta -out_NT {group}_NT.fasta -fs 10 -stop 10
 ```
 
+### Concatenate alignments of a random set of genes with bootstrapping
+
+
