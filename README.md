@@ -53,7 +53,7 @@ After we obtained the boostrapping results for branch-wise dN/dS and pair-wise d
 The species divergence time is estimated according to the dS from boostrapped autosomal gene sets.
 
 The social transition time can be solved as following.
-![solving_time](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/solving_time.jpeg) 
+![solving_time](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/solving_time.jpeg) 
 ## PSMC
 
 
