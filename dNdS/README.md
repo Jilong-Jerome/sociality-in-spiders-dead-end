@@ -81,7 +81,7 @@ macse -prog alignSequences -seq {group}_unalign.fasta -out_AA {group}_AA.fasta -
 
 ### Concatenate alignments of a random set of genes with bootstrapping
 
-See complete codes in [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/boostrap/workflow.py)
+See complete codes for alignment process and branch-wise dN/dS in [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/boostrap/workflow.py)
 
 We do bootstrapping estimation of dN/dS for X chromosomes and autosomes separately. We randomly sample 500 or 100 ortholog groups out of the 2302 autosomal genes or 347 X chromosome genes respectively. In the following example codes, we show how a single round of boostrapping being performed.
 
