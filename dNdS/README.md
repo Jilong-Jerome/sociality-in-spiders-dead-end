@@ -81,4 +81,66 @@ macse -prog alignSequences -seq {group}_unalign.fasta -out_AA {group}_AA.fasta -
 
 ### Concatenate alignments of a random set of genes with bootstrapping
 
+See complete codes in [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/boostrap/workflow.py)
+
+We do bootstrapping estimation of dN/dS for X chromosomes and autosomes separately. We randomly sample 500 or 100 ortholog groups out of the 2302 autosomal genes or 347 X chromosome genes respectively. In the following example codes, we show how a single round of boostrapping being performed.
+
+1. Select a random set of genes
+
+#### Showcase of random selecting a set of 500 autosomal genes from the 2302 autosomal single-copy orthologs
+
+```
+# Prepare inputs
+n = 500
+out = "auto_{n}_{j}".format(n=n,j=i+1)
+target = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/PUB1_GENOME/dnds/8_sp/auto_og_pass.txt"
+
+# random select 500 genes from autosomal orthologs
+shuf -n {n} {target} |cut -f1 >  {out}_id.txt 
+```
+
+2. Concatenate the alignments from the selected set of genes and then filter out regions that are prone to local mis-alignment. Continuous alignments without gaps are considerd as a single alignment block, only the alignment block longer than 300 nucleotide and polymorphysim fraction lower than 15% is kept.
+
+Codes for alignment filtering can be found in [filter_region.R](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/boostrap/filter_region.R) [find_region.R](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/boostrap/find_region.R) [align_filter.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/boostrap/align_filter.py), and [align_filter_region_fa.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/boostrap/align_filter_region_fa.py)
+
+#### Showcase of concatenating the alignments from concate
+
+```
+# Prepare inputs
+cat_string  = ""
+ids = open(path+"/"+id_list+"_id.txt")
+for og_id in ids:
+    phy_file = ALN_PATH+"/{og_id}_NT_fix.fasta".format(og_id=og_id.strip("\n"))
+    cat_string = cat_string + phy_file + " "
+
+# Concatenate alignments from the selected genes
+conda activate goalign
+goalign concat -i {cat_string} > {out}.cat
+
+conda activate biopython
+python /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/PUB1_GENOME/dnds/combine_OG/align_filter.py {out}.cat {out}.region
+echo raw_region_done
+
+conda activate gwf
+Rscript /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/PUB1_GENOME/dnds/combine_OG/find_region.R {out}.region {out}.region.all
+echo region_summary_done
+
+conda activate gwf
+Rscript /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/PUB1_GENOME/dnds/combine_OG/filter_region.R {out}.region.all {out}.region.filtered
+echo region_retrieve_done
+
+conda activate biopython
+python /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/PUB1_GENOME/dnds/combine_OG/align_filter_region_fa.py {out}.cat {out}.region.filtered.tsv {out}.filtered.phy
+echo retreive_region_align_done
+
+conda activate goalign
+goalign concat -i {out}.filtered.phy -p > {out}.filtered.concat.phy
+conda activate clustalo
+trimal -in {out}.filtered.concat.phy -phylip3.2 -out {out}.filtered.concat.paml.phy
+```
+
+
+
+
+
 
