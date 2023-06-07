@@ -139,7 +139,35 @@ conda activate clustalo
 trimal -in {out}.filtered.concat.phy -phylip3.2 -out {out}.filtered.concat.paml.phy
 ```
 
+### Running branch-wise dN/dS estimation in PAML
 
+The concatenated alignments after filtering are ready for estimating dN/dS in branch-wise for all the branches in the phylogeny of 8 *Stegodyphus* species.
+
+The control file used for codeml brach-wise dN/dS can be found at [codeml.ctl](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/boostrap/codeml_ofree.ctl)
+The tree phylogeny used for estimation can be found at [tree.txt](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/boostrap/tree_ofree.txt)
+#### Showcase of running codeml in PAML for brach-wise dN/dS
+```
+#Prepare inputs
+out = "auto_{n}_{j}".format(n=n,j=i+1)
+codeml_path = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/PUB1_GENOME/dnds/8_dnds/codeml"
+mode = "ofree"
+reform_script = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/PUB1_GENOME/dnds/7_sp/reform_results.py"
+alignment = "/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/PUB1_GENOME/dnds/8_dnds/boostrap/auto/{out}/{out}.fa".format(out=out)
+
+#Run CodeML and parse outputs
+cp {codeml_path}/codeml_{mode}.ctl codeml.ctl
+cp {codeml_path}/tree_{mode}.txt tree.txt
+ln -f -s {group}.fa.filtered.concat.paml.phy seq.txt
+conda activate paml
+codeml     
+echo {group} > {group}.name
+paste {group}.name rst1 > {group}.res
+rm {group}.name
+tail -n 10 results.txt > results.raw
+conda activate ete3
+python /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/PUB1_GENOME/dnds/7_sp/combine_OG/boostrap/paml2tab.py results.raw {group}.tab {group}
+python /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/PUB1_GENOME/dnds/8_sp/boostrap/pair_social.py {group}.tab {group}_social.tab
+```
 
 
 
