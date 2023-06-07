@@ -179,7 +179,7 @@ We start with mapping a single individual from each population to the reference 
 
 Codes for alignment of single individual paird short read DNAseq can be found at [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/dna_align/workflow.py)
 
-Workflow for creating all population reference and retriveing coding sequence of orthologs can be found at [workflow.py](/home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/PUB1_GENOME/dnds/population_dnds/workflow.py)
+Workflow for creating all population reference and retriveing coding sequence of orthologs can be found at [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/population_prepare/workflow.py)
 #### Showcase of creating population reference
 ```
 # Call variants
@@ -197,4 +197,13 @@ bcftools consensus -f {refin} --sample {name} {name}.noindel.vcf.gz > {refout}
 agat_sp_extract_sequences.pl -g {gffin} -f {refin} -t cds -o {faout}.temp 
 python /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/scripts/PUB1_GENOME/dnds/pep_reformat_sp.py {sp} {faout}.temp {faout}
 ```
- 
+
+2. Boostraping pair-wise dN/dS estimation for random set of genes (autosomes only)
+
+The full process resembles the same procedure as branch-wise dN/dS estimation, but with only a pair of sequence. Since the two population reference genome shares the same coordinate system, we did not filter for local mis-alignment as in previous multiple genome alignments.
+
+The workflow for the population pair-wise dN/dS estimation can be found at [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/population_dnds/workflow.py)
+
+The control file for codeml in PAML can be found at [codeml.ctl](workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/population_dnds/codeml.ctl)
+
+
