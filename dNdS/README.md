@@ -53,6 +53,17 @@ See complete codes in [og_filter.Rmd](https://github.com/Jilong-Jerome/sociality
 
 See complete codes in [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/PAC/workflow.py)
 
+```
+# Prepare inputs
+id = "PAC_128"
+bam_in = "/home/jilong/spider2/faststorage/social_spiders_2020/data/BACKUP/pacificus_consensus/pac128.bam"
+fasta_out = id+"_consensus.fa"
+
+# Run samtools consensus
+samtools consensus -a --show-del yes --show-ins no -f fasta -o {fasta_out} {bam_in} -@ 8
+
+```
+
 ## Alignments
 
 ### Multiple alignment of each single-copy orthologs across the 8 species in analysis
