@@ -54,7 +54,7 @@ The species divergence time is estimated according to the dS from boostrapped au
 
 The social transition time can be solved as following.
 ![solving_time](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/solving_time.jpeg) 
-## PSMC
+## [PSMC]((https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/PSMC/README.md))
 
 
 ## Codes for plotting
