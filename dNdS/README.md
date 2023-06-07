@@ -204,6 +204,6 @@ The full process resembles the same procedure as branch-wise dN/dS estimation, b
 
 The workflow for the population pair-wise dN/dS estimation can be found at [workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/population_dnds/workflow.py)
 
-The control file for codeml in PAML can be found at [codeml.ctl](workflow.py](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/population_dnds/codeml.ctl)
+The control file for codeml in PAML can be found at [codeml.ctl](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/population_dnds/codeml.ctl)
 
 
