@@ -206,4 +206,4 @@ The workflow for the population pair-wise dN/dS estimation can be found at [work
 
 The control file for codeml in PAML can be found at [codeml.ctl](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/population_dnds/codeml.ctl)
 
-
+## Estimating divergence time and transition time

@@ -1,0 +1,172 @@
+---
+title: "figure_1_samples_and_data"
+author: "Jilong"
+date: "3/3/2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggpubr)
+```
+
+```{r}
+#load data
+branch_df <- read_tsv("auto_500_single_pac_clean.tab")
+DUM_pair <- read_delim("DUM_pair.tab",delim = " ",col_names = F)%>%select(pair_w = X12)
+MIM_pair <- read_delim("MIM_pair.tab",delim = " ",col_names = F)%>%select(pair_w = X12)
+SARA_pair <- read_delim("SARA_pair.tab",delim = " ",col_names = F)%>%select(pair_w = X12)
+```
+
+```{r}
+##define function
+social_transition <- function(branch_df, pair, social, subsocial,t_mean,t_sd) {
+  branch_1 <- branch_df %>%
+    filter(nodename == social) %>%
+    mutate(w = dN/dS) %>%
+    select(w)
+  branch1_mean <- mean(branch_1$w)
+  branch1_se <- sd(branch_1$w) / sqrt(500)
+
+  branch_2 <- branch_df %>%
+    filter(nodename == subsocial) %>%
+    mutate(w = dN/dS) %>%
+    select(w)
+  branch2_mean <- mean(branch_2$w)
+  branch2_se <- sd(branch_2$w) / sqrt(500)
+
+  pair_mean <- mean(pair$pair_w)
+  pair_se <- sd(pair$pair_w) / sqrt(500)
+
+  social_vec <- c()
+  for (i in 1:10000) {
+    pair_w <- rnorm(1, mean = pair_mean, sd = pair_se)
+    branch1_w <- rnorm(1, mean = branch1_mean, sd = branch1_se)
+    branch2_w <- rnorm(1, mean = branch2_mean, sd = branch2_se)
+    div_T <- rnorm(1, mean = t_mean, sd = t_sd)
+    social_time <- (branch1_w - branch2_w) / (pair_w - branch2_w) * div_T
+    social_vec <- c(social_vec, social_time)
+  }
+  print(branch1_mean)
+  print(branch1_se*3)
+  print(branch2_mean)
+  print(branch2_se*3)
+  print(pair_mean)
+  print(pair_se*3)
+  return(social_vec)
+}
+
+```
+
+```{r}
+##Divergence time
+# DUM-TENT
+dS_vec <- branch_df%>%
+  filter(nodename %in% c("DUM","TENT"))%>%
+  select(dS)
+t_mean_DT <- mean(dS_vec$dS)/5e-09
+t_sd_DT <-sd(dS_vec$dS)/5e-09
+
+# MIM-AFR
+dS_vec <- branch_df%>%
+  filter(nodename %in% c("MIM","AFR"))%>%
+  select(dS)
+t_mean_MA <- mean(dS_vec$dS)/5e-09
+t_sd_MA <-sd(dS_vec$dS)/5e-09
+
+# SARA-PAC
+dS_vec <- branch_df%>%
+  filter(nodename %in% c("SARA"))%>%
+  select(dS)
+t_mean_SP <- mean(dS_vec$dS)/5e-09
+t_sd_SP <-sd(dS_vec$dS)/5e-09
+
+# SARA-PAC
+dS_vec <- branch_df%>%
+  filter(nodename %in% c("SARA"))%>%
+  select(dS)
+t_mean_SP <- mean(dS_vec$dS)/5e-09
+t_sd_SP <-sd(dS_vec$dS)/5e-09
+
+# SARA-BI
+dS_vec <- branch_df%>%
+  filter(nodename %in% c("BI"))%>%
+  select(dS)
+t_mean_SB <- mean(dS_vec$dS)/5e-09
+t_sd_SB <-sd(dS_vec$dS)/5e-09
+
+wide_branch_dS <- branch_df%>%
+  select(nodename,dS,id)%>%
+  group_by(id)%>%
+  pivot_wider(names_from = nodename,values_from = dS)
+
+t_SPDT_vec <- wide_branch_dS%>%
+  mutate(dS_t1 = ((DUM + TENT)/2 + TENT_DUM + (SARA+PAC_SARA+BI)/2  + BI_PAC_SARA)/2)%>%
+  select(dS_t1)%>%
+  mutate(dS_t1_y = dS_t1/5e-09)
+t_mean_SPDT <- mean(t_SPDT_vec$dS_t1_y)
+t_sd_SPDT <- sd(t_SPDT_vec$dS_t1_y)
+
+t_SPDTAM_vec <- wide_branch_dS%>%
+  mutate(dS_t2 = (((DUM + TENT)/2 + TENT_DUM + (SARA+PAC_SARA+BI)/2  + BI_PAC_SARA)/2 + TENT_DUM_BI_PAC_SARA + (MIM + AFR)/2 + AFR_MIM)/2 )%>%
+  select(dS_t2)%>%
+  mutate(dS_t2_y = dS_t2/5e-09)
+t_mean_SPDTAM <- mean(t_SPDTAM_vec$dS_t2_y)
+t_sd_SPDTAM <- sd(t_SPDTAM_vec$dS_t2_y)
+
+t_L_vec <- wide_branch_dS%>%
+  mutate(dS_L = ((((DUM + TENT)/2 + TENT_DUM + (SARA+PAC_SARA+BI)/2  + BI_PAC_SARA)/2 + TENT_DUM_BI_PAC_SARA + (MIM + AFR)/2 + AFR_MIM)/2 + LIN)/2 )%>%
+  select(dS_L)%>%
+  mutate(dS_L_y = dS_L/5e-09)
+t_mean_L <- mean(t_L_vec$dS_L_y)
+t_sd_L <- sd(t_L_vec$dS_L_y)
+
+t_B_vec <- wide_branch_dS%>%
+  mutate(dS_B = (BI + SARA + PAC_SARA)/2)%>%
+  select(dS_B)%>%
+  mutate(dS_B_y = dS_B/5e-09)
+t_mean_B <- mean(t_B_vec$dS_B_y)
+t_sd_B <- sd(t_B_vec$dS_B_y)
+
+```
+
+```{r}
+
+```
+
+```{r}
+# Set the seed
+set.seed(688344)
+DUM_trans <- social_transition(branch_df,DUM_pair,"DUM","TENT",t_mean_DT,t_sd_DT)
+hist(DUM_trans)
+mean(DUM_trans)
+quantile(DUM_trans,0.025)
+quantile(DUM_trans,0.975)
+```
+
+```{r}
+# Set the seed
+set.seed(688344)
+SARA_trans <- social_transition(branch_df,SARA_pair,"SARA","PAC",t_mean_SP,t_sd_SP)
+hist(SARA_trans)
+mean(SARA_trans)
+quantile(SARA_trans,0.025)
+quantile(SARA_trans,0.975)
+set.seed(688344)
+SARA_trans <- social_transition(branch_df,SARA_pair,"SARA","BI",t_mean_SB,t_sd_SB)
+hist(SARA_trans)
+mean(SARA_trans)
+quantile(SARA_trans,0.025)
+quantile(SARA_trans,0.975)
+```
+
+```{r}
+# Set the seed
+set.seed(688344)
+MIM_trans <- social_transition(branch_df,MIM_pair,"MIM","AFR",t_mean_MA,t_sd_MA)
+hist(MIM_trans)
+mean(MIM_trans)
+quantile(MIM_trans,0.025)
+quantile(MIM_trans,0.975)
+```
