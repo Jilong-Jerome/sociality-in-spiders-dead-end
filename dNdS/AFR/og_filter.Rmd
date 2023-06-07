@@ -1,0 +1,135 @@
+---
+title: "dnds_spider"
+author: "Jilong"
+date: "1/24/2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggrepel)
+```
+
+Dataset from running GENESPACE and OrthoFinder is retrived
+
+```{r}
+pangenome <- read_tsv("LIN_pangenomeDB.txt")%>%select(pgChr,pgOrd,id)
+og_list <- read_tsv("Orthogroups.tsv")
+dnds_single <- read_tsv("paml_one_single_OG.tsv",col_names = c("Orthogroup","Ncodon","tstv","dnds","ll","tl_dn","tl_ds"))
+```
+
+```{r}
+single_dnds <- left_join(dnds_single,og_list,by=c("Orthogroup"="Orthogroup"))
+single_dnds%>%select(LIN)%>%unique()%>%NROW()
+single_df <- left_join(single_dnds,pangenome,by=c("LIN"="id"))%>%distinct()%>%
+  separate(pgChr,c("none","chr_id"),"_")%>%
+  mutate(chr = as.integer(chr_id))%>%
+  mutate(chr_paint = (chr%%2==0))
+```
+
+Checking for transcripts from S.africanus that hits any orthologs
+
+```{r}
+## wide to long for single copy ortholog
+og_gene<- single_dnds%>%
+  select(Orthogroup,MIM,TENT,DUM,LIN,BI,SARA)%>%
+  gather(sp,gene_id,MIM:SARA)
+
+## africanus alignment
+africanus <- read_tsv("africanus_hit.tsv",col_names = F)%>%
+  select(afr = X1, single_copy = X2, pident = X3, align_l = X4, evalue = X11,sstart = X9,send = X10)%>%
+  separate(col = single_copy, into = c("sp_code","gene_id"), sep=".HiC",remove = FALSE)
+
+africanus_df <- left_join(africanus,og_gene,by=c("single_copy"="gene_id"))
+
+
+og_align <- africanus_df%>%group_by(Orthogroup)%>%
+  summarise(length = max(align_l))%>%
+  filter(length > 200)%>%NROW()
+
+pep_len <- read_tsv("single_copy_pep.fa.fai",col_names = c("id","len","A","B"))%>%
+  select(id,len)
+
+
+#hist(og_align$length,breaks = 100)
+
+pep_df <- left_join(pep_len,og_gene,by=c("id"="gene_id"))%>%
+  select(Orthogroup,id,len)%>%
+  filter(Orthogroup %in% africanus_df$Orthogroup)%>%
+  group_by(Orthogroup)%>%
+  summarize(
+    len = mean(len),
+    type = "og")%>%
+  arrange(Orthogroup)
+afr_df <- africanus_df%>%
+  group_by(Orthogroup)%>%
+  summarise(
+    len = max(align_l),
+    type = "trinity")%>%
+  arrange(Orthogroup)
+len_df <- rbind(pep_df,afr_df)
+len_df%>%
+  ggplot()+
+  #geom_jitter()+
+  geom_histogram(mapping = aes(x=len,color=type,fill=type),position = "dodge",alpha=0.3,bins = 100)+
+  theme_bw()
+  #ylim(0,2)
+
+len_wide <- left_join(pep_df,afr_df,by = c("Orthogroup"="Orthogroup"))%>%
+  filter(abs(len.y - len.x)/len.x < 0.10) %>%
+  filter(len.y > 100)
+len_wide%>%
+  mutate(group = as.integer(len.x/500))%>%
+  mutate(group = as.factor(ifelse(group >=4,5,group+1)))%>%
+  ggplot()+
+  geom_segment(aes(x=type.x,xend=type.y,y=len.x,yend=len.y,color=group),alpha = 0.2)+
+  geom_violin(aes(x=type.x,y=len.x,color = "og",fill = "og"),alpha = 0.3)+
+  geom_violin(aes(x=type.y,y=len.y,color = "trinity",fill = "trinity"),alpha = 0.3)+
+  facet_wrap(~group,strip.position="right",scales = "free")+
+  theme_bw()
+
+ortho_afr_id <- africanus_df%>%
+  filter(Orthogroup %in% len_wide$Orthogroup)%>%
+  group_by(Orthogroup)%>%
+  slice(which.max(align_l))%>%
+  select(Orthogroup,afr)
+
+write_tsv(ortho_afr_id,"OG_AFR.tsv")
+
+
+```
+
+```{r}
+ident_afr <- read_tsv("og_ident.sim",col_names = F)%>%
+  gather(sp,sim,X3:X9)%>%
+  group_by(X1)%>%
+  summarise(
+    min_sim = min(sim)
+  )
+
+ident_afr%>%
+  #filter(min_sim > 0.7)%>%
+  ggplot()+
+  geom_histogram(aes(x=min_sim))
+
+valid_og <- ident_afr%>%filter(min_sim > 0.75)
+o2_dt <- read_tsv("o2_dnds.tsv",col_names = F)%>%
+  select(og = X1,
+         subsocial = X19,
+         MIM = X20,
+         DUM = X21,
+         SARA = X22,
+         tl_dn = X24,
+         tl_ds = X25)%>%
+  filter(og %in% valid_og$X1)
+o2_dt <- left_join(o2_dt,og_chr,by=c("og"="Orthogroup"))
+```
+
+
+
+```{r}
+o2_dt%>%filter(type == "Auto")%>% select(og,type) %>% write_tsv("7_sp_og_auto.txt")
+
+o2_dt%>%filter(type == "X")%>% select(og,type) %>% write_tsv("7_sp_og_x.txt")
+```
