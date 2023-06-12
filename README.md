@@ -78,7 +78,7 @@ The obtained Ne_X/Ne_Auto ratio curves are polished by fitting splines in R
 
 ### Figure 2 - dN/dS estimations
 
-[codes](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/figures/figure_2/figure2_dn\ ds\ and\ estimates.Rmd)
+[codes](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/figures/figure_2/figure2_dnds_and_estimates.Rmd)
 
 ### Figure 3 - PSMC results
 
