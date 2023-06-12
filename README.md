@@ -70,7 +70,7 @@ To be able to calulate the ratio between effective population size from X chromo
 
 The obtained Ne_X/Ne_Auto ratio curves are polished by fitting splines in R 
 
-## Codes for plotting
+## Raw codes and dataset for plotting
 
 ### Figure 1 - phylogeny and sample distributions
 
