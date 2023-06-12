@@ -55,7 +55,7 @@ The species divergence time is estimated according to the dS from boostrapped au
 The social transition time can be solved as following.
 ![solving_time](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/dNdS/solving_time.jpeg) 
 
-## [PSMC]((https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/PSMC/README.md))
+## [PSMC](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/PSMC/README.md)
 
 ### Creating pesuo-diploid for social species
 The PSMC method relies on a single diploid individual, where the social species runs out of heterozygosity due to inbreeding. We combine the DNA-seq of two individuals from two separate and diverged populations to retain the loss of heterozygosity.
