@@ -1,0 +1,365 @@
+---
+title: "figure_1_samples_and_data"
+author: "Jilong"
+date: "3/3/2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(sf)
+library(ggrepel)
+library(ggimage)
+library(treeio)
+library(ggtree)
+library(ape)
+```
+
+
+```{r}
+pop <- c("S.lineatus","S.mimosarum","S.dumicola","S.dumicola","S.mimosarum","S.sarasinorum","S.tentoriicola","S.bicolor")
+lat <- c(30.805311,-18.868499,-19.654697,-28.052735,-28.887923,27.007796,-33.458177,-15.93)
+long <- c(34.825607,47.479210,17.327452,18.714993,30.042178,80,21.148091,25.336534)
+social <- c("subsocial","social","social","social","social","social","subsocial","subsocial")
+img <- c("/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png")
+data_type <- c("assembly","population","populaton","population","population","assembly","assembly","assembly")
+lat_shift <- c(5,5,5,3,5,-5,0,5)
+long_shift <- c(5,5,-5,6,10,-5,-10,5)
+sample_df <- data.frame(pop,long,lat,social,img,data_type,lat_shift,long_shift)
+
+world_map <- ne_countries(scale = "small", returnclass = "sf")
+
+# Set the theme of our ggplot2 objects for this session
+theme_set(theme_bw())
+
+# The ggplot call is normal
+sample_map <- ggplot() + 
+  # But we use a new geom provided by the sf package
+  geom_sf(data = world_map,fill=NA,color = "grey60") +
+  #geom_point(aes(decimalLongitude, decimalLatitude, color = label),
+  #           alpha = 0.05) +
+  #geom_point(aes(x, y, fill = label), data = filter(tab, !is.na(x)),
+  #           shape = 21) +
+  geom_point(data = sample_df,aes(y=lat,x=long,color=social),legend=NA)+
+  #geom_label_repel(data = sample_df,aes(x=lat,y=long,label=rev(img)))+
+  geom_segment(aes(y=lat,yend=lat+lat_shift,x=long,xend=long+long_shift,color = social))+
+  geom_image(data = sample_df, aes(y = lat+lat_shift, x = long+long_shift, image = img), size = 0.08)+
+  geom_label(data = sample_df, aes(y = lat + lat_shift + 5, x = long + long_shift, label = pop),size = 2)+
+  xlim(c(-20, 85)) +
+  ylim(c(-35, 55)) +
+  NULL
+
+sample_map
+```
+```{r}
+tree_newick <- "sp_7_ds_tree.txt"
+
+tree <- read.nhx(tree_newick)
+imgs <- c("/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png")
+imgs <- rep("/Users/au688344/Pictures/lin_spider.png",13)
+img_df <- data.frame(imgs)
+phylo <- ggplot(tree,aes(x,y)) %<+% img_df + 
+  geom_tree(aes(color=dnds),size = 1) +
+  geom_tiplab(aes(image = imgs), geom="image",size = 0.1,offset = 0.08,align = TRUE) +
+  geom_tiplab(aes(label=dnds),geom="label",offset = 0.04,align = TRUE)+
+  geom_tiplab(geom = "label",color = "black",offset = 0.01, align = TRUE, linetype = NA) +
+  geom_tiplab(aes(subset = node %in% c(3,5,7)),geom = "label",color = "coral",offset = 0.01, align = TRUE, linetype = NA) +
+  #geom_label(aes(x=branch, label=S), fill='lightgreen') + 
+  geom_tippoint(aes(subset = node == 3, x = x - branch.length * 0.2066),size = 1, color = "coral",alpha = 1)+
+  geom_tiplab(aes(subset = node == 3, x = x - branch.length * 0.2066,label="500ky"),geom = "text", color = "coral", size = 2, vjust = -1.5)+
+  geom_tippoint(aes(subset = node == 5, x = x - branch.length * 0.163),color = "coral",size = 1, alpha = 1)+
+  geom_tiplab(aes(subset = node == 5, x = x - branch.length * 0.163,label="300ky"),geom = "text", color = "coral", size = 2, vjust = -1.5)+
+  geom_tippoint(aes(subset = node == 7),size = 1, color = "black", alpha = 1)+
+  geom_nodelab(aes(subset = node == 8, x = x,label = "20.9My"),geom = "label", color = "black",size = 2)+
+  geom_nodelab(aes(subset = node == 9, x = x,label = "14.62My"),geom = "label", color = "black",size = 2)+
+  geom_nodelab(aes(subset = node == 10, x = x,label = "1.95My"),geom = "label", color = "black",size = 2)+
+  geom_nodelab(aes(subset = node == 11, x = x,label = "11.36My"),geom = "label", color = "black",size = 2)+
+  geom_nodelab(aes(subset = node == 12, x = x,label = "1.41My"),geom = "label", color = "black",size = 2)+
+  geom_nodelab(aes(subset = node == 13, x = x,label = "3.09My"),geom = "label", color = "black",size = 2)+
+  xlim(NA,0.23)+
+  geom_treescale()+
+  theme_tree()
+phylo
+```
+
+```{r}
+tree_newick <- "sp_7_ds_tree_long.txt"
+
+tree <- read.nhx(tree_newick)
+
+phylo <- ggplot(tree,aes(x,y)) + 
+  geom_tree(aes(color=dnds),size = 1) +
+  geom_tiplab(aes(label=dnds),geom="label",offset = 0.09,align = TRUE)+
+  geom_tiplab(geom = "label",color = "black",fontface = "italic",size = 3, offset = 0.01, align = TRUE, linetype = NA) +
+  geom_tiplab(aes(subset = node %in% c(3,5,7)),geom = "label",color = "coral",size = 3,fontface = "italic",offset = 0.01, align = TRUE, linetype = NA) +
+  #geom_label(aes(x=branch, label=S), fill='lightgreen') + 
+  geom_tippoint(aes(subset = node == 3, x = x - branch.length * 0.2066),size = 1, color = "coral",alpha = 1)+
+  geom_tiplab(aes(subset = node == 3, x = x - branch.length * 0.2066,label="500ky"),geom = "text", color = "coral", size = 2, vjust = -1.5)+
+  geom_tippoint(aes(subset = node == 5, x = x - branch.length * 0.163),color = "coral",size = 1, alpha = 1)+
+  geom_tiplab(aes(subset = node == 5, x = x - branch.length * 0.163,label="300ky"),geom = "text", color = "coral", size = 2, vjust = -1.5)+
+  geom_tippoint(aes(subset = node == 7),size = 1, color = "black", alpha = 1)+
+  geom_nodelab(aes(subset = node == 8, x = x,label = "20.9My"),geom = "label", color = "black",size = 2)+
+  geom_nodelab(aes(subset = node == 9, x = x,label = "14.62My"),geom = "label", color = "black",size = 2)+
+  geom_nodelab(aes(subset = node == 10, x = x,label = "1.95My"),geom = "label", color = "black",size = 2)+
+  geom_nodelab(aes(subset = node == 11, x = x,label = "11.36My"),geom = "label", color = "black",size = 2)+
+  geom_nodelab(aes(subset = node == 12, x = x,label = "1.41My"),geom = "label", color = "black",size = 2)+
+  geom_nodelab(aes(subset = node == 13, x = x,label = "3.09My"),geom = "label", color = "black",size = 2)+
+  xlim(NA,0.23)+
+  geom_treescale()+
+  theme_tree()
+phylo
+```
+
+```{r}
+tree_newick <- "sp_7_ds_tree_long.txt"
+
+tree <- read.nhx(tree_newick)
+phylo <- ggplot(tree,aes(x,y)) +
+  geom_tree(aes(color=dnds),size = 1) +
+  geom_tiplab(aes(subset = node %in% c(1,2,3,4,5,6,7),label=dnds),geom="label",offset = 0.09,size = 3)+
+  geom_tiplab(geom = "label",fontface = "italic",color = "black",offset = 0.02, align = TRUE, linetype = NA,size = 3) +
+  geom_tiplab(aes(subset = node %in% c(3,5,7)),geom = "label",fontface = "italic",color = "coral",offset = 0.02, align = TRUE, linetype = NA,size = 3) +
+  #geom_label(aes(x=branch, label=S), fill='lightgreen') + 
+  geom_tippoint(aes(subset = node == 3, x = x - branch.length * 0.2066),size = 1, color = "coral",alpha = 1)+
+  geom_tiplab(aes(subset = node == 3, x = x - branch.length * 0.2066,label="500ky"),geom = "text", color = "coral", size = 2, vjust = -1.5)+
+  geom_tippoint(aes(subset = node == 5, x = x - branch.length * 0.163),color = "coral",size = 1, alpha = 1)+
+  geom_tiplab(aes(subset = node == 5, x = x - branch.length * 0.163,label="300ky"),geom = "text", color = "coral", size = 2, vjust = -1.5)+
+  geom_tippoint(aes(subset = node == 7),size = 1, color = "black", alpha = 1)+
+  geom_nodelab(aes(subset = node == 8, x = x,label = "20.9My"),geom = "label", color = "black",size = 2)+
+  geom_nodelab(aes(subset = node == 9, x = x,label = "14.62My"),geom = "label", color = "black",size = 2)+
+  geom_nodelab(aes(subset = node == 10, x = x,label = "1.95My"),geom = "label", color = "black",size = 2)+
+  geom_nodelab(aes(subset = node == 11, x = x,label = "11.36My"),geom = "label", color = "black",size = 2)+
+  geom_nodelab(aes(subset = node == 12, x = x,label = "1.41My"),geom = "label", color = "black",size = 2)+
+  geom_nodelab(aes(subset = node == 13, x = x,label = "3.09My"),geom = "label", color = "black",size = 2)+
+  xlim(NA,0.23)+
+  geom_treescale()+
+  theme_tree()
+phylo
+```
+
+```{r}
+library(ggpubr)
+ggarrange(sample_map,phylo,ncol = 2,labels = c("A","B"),align = "hv")
+sample_map
+phylo
+```
+
+```{r}
+tree_newick <- "sp_7_ds_tree.txt"
+tree <- read.nhx(tree_newick)
+tree%>%
+  ggplot(aes(x,y)) + 
+  geom_tree(aes(color=dn_rise),size = 1)+
+  geom_tiplab(geom = "label",color = "black",offset = 0.01, align = TRUE, linetype = NA) +
+  geom_tiplab(aes(subset = node %in% c(3,5,7)),geom = "label",color = "coral",offset = 0.01, align = TRUE, linetype = NA)+
+  xlim(NA,0.15)+
+  scale_colour_gradient(low = "black", high = "red")+
+  geom_treescale()+
+  theme_tree()
+
+tree%>%
+  ggplot(aes(x,y)) + 
+  geom_tree(aes(color=ds_reduce),size = 1)+
+  geom_tiplab(geom = "label",color = "black",offset = 0.01, align = TRUE, linetype = NA) +
+  geom_tiplab(aes(subset = node %in% c(3,5,7)),geom = "label",color = "coral",offset = 0.01, align = TRUE, linetype = NA)+
+  xlim(NA,0.15)+
+  scale_colour_gradient(low = "black", high = "red")+
+  geom_treescale()+
+  theme_tree()
+
+tree%>%
+  ggplot(aes(x,y)) + 
+  geom_tree(aes(color=ds_reduce*dn_rise),size = 1)+
+  geom_tiplab(geom = "label",color = "black",offset = 0.01, align = TRUE, linetype = NA) +
+  geom_tiplab(aes(subset = node %in% c(3,5,7)),geom = "label",color = "coral",offset = 0.01, align = TRUE, linetype = NA)+
+  xlim(NA,0.15)+
+  scale_colour_gradient(low = "black", high = "red")+
+  geom_treescale()+
+  theme_tree()
+
+
+
+```
+
+```{r}
+tree_newick <- "sp_7_ds_tree.txt"
+tree <- read.nhx(tree_newick)
+tree%>%
+  ggplot(aes(x,y)) + 
+  geom_tree(aes(color=dn_rise),size = 1)+
+  geom_tiplab(geom = "label",color = "black",offset = 0.01, align = TRUE, linetype = NA) +
+  geom_tiplab(aes(subset = node %in% c(3,5,7)),geom = "label",color = "coral",offset = 0.01, align = TRUE, linetype = NA)+
+  xlim(NA,0.15)+
+  scale_colour_gradient(low = "black", high = "red")+
+  geom_treescale()+
+  theme_tree()
+
+tree%>%
+  ggplot(aes(x,y)) + 
+  geom_tree(aes(color=ds_reduce),size = 1)+
+  geom_tiplab(geom = "label",color = "black",offset = 0.01, align = TRUE, linetype = NA) +
+  geom_tiplab(aes(subset = node %in% c(3,5,7)),geom = "label",color = "coral",offset = 0.01, align = TRUE, linetype = NA)+
+  xlim(NA,0.15)+
+  scale_colour_gradient(low = "black", high = "red")+
+  geom_treescale()+
+  theme_tree()
+```
+```{r}
+tree_newick <- "sp_8_ds_tree.txt"
+imgs <- c("/Users/au688344/Pictures/Jilong/lineatus/lin_cut.png",
+         "/Users/au688344/Pictures/Jilong/africanus/afr_cut.png",
+         "/Users/au688344/Pictures/Jilong/mimosarum/mim_cut.png",
+         "/Users/au688344/Pictures/Jilong/tentoriicola/tent_cut.png",
+         "/Users/au688344/Pictures/Jilong/dumicola/dum_cut.png",
+         "/Users/au688344/Pictures/Jilong/bicolor/bi_cut.png",
+         "/Users/au688344/Pictures/Jilong/sarasinorum/sara_cut.png",
+         "/Users/au688344/Pictures/Jilong/pacificus/pac_cut.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png",
+         "/Users/au688344/Pictures/lin_spider.png"
+         )
+#imgs <- c("/Users/au688344/Pictures/Jilong/lineatus/Stegodyphus lineatus08 f.jpg",
+#         "/Users/au688344/Pictures/Jilong/africanus/Africanus.JPG",
+#         "/Users/au688344/Pictures/Jilong/mimosarum/mimosarum (4a).jpg",
+#         "/Users/au688344/Pictures/Jilong/tentoriicola/IMG_5050.JPG",
+#         "/Users/au688344/Pictures/Jilong/dumicola/dumibroodcare01.jpg",
+#         "/Users/au688344/Pictures/Jilong/bicolor/S bicolor female.jpg",
+#         "/Users/au688344/Pictures/Jilong/sarasinorum/Virginia Settepani - Stegodyphus sarasinorum group attacking an ant, #India.jpg",
+#         "/Users/au688344/Pictures/Jilong/pacificus/S. pacificus (3).JPG",
+#         "/Users/au688344/Pictures/lin_spider.png",
+#         "/Users/au688344/Pictures/lin_spider.png",
+#         "/Users/au688344/Pictures/lin_spider.png",
+#         "/Users/au688344/Pictures/lin_spider.png",
+#         "/Users/au688344/Pictures/lin_spider.png",
+#         "/Users/au688344/Pictures/lin_spider.png",
+#         "/Users/au688344/Pictures/lin_spider.png"
+#         )
+tree <- read.nhx(tree_newick)
+phylo <- ggplot(tree,aes(x,y)) +
+  geom_tree(size = 5,color = "#8c887d") +
+  #geom_tiplab(aes(subset = node %in% c(1,2,3,4,5,6,7),label=dnds),geom="label",offset = 0.04,size = 3)+
+  geom_tiplab(geom = "text",fontface = "italic",family = "Times New Roman",color = "black",offset = 0.01, align = TRUE, linetype = NA,size = 50) +
+  geom_tiplab(aes(image = imgs), geom="image",size = 0.1, offset = 0.07) +
+  geom_tiplab(aes(subset = node %in% c(3,5,7)),geom = "text",fontface = "italic",family = "Times New Roman",color = "coral",offset = 0.01, align = TRUE, linetype = NA,size = 50) +
+  geom_nodelab(aes(subset = node == 9, x = x,label = "20.9My"),nudge_x = -0.01,nudge_y = -0.15, geom = "text", color = "black",fill = "#DADBE5",size = 40)+
+  geom_nodelab(aes(subset = node == 10, x = x,label = "14.62My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5",size = 40)+
+  geom_nodelab(aes(subset = node == 11, x = x,label = "1.95My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5",size = 40)+
+  geom_nodelab(aes(subset = node == 12, x = x,label = "11.36My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5",size = 40)+
+  geom_nodelab(aes(subset = node == 13, x = x,label = "1.41My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5",size = 40)+
+  geom_nodelab(aes(subset = node == 14, x = x,label = "3.09My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5",size = 40)+
+  geom_nodelab(aes(subset = node == 15, x = x,label = "1.30My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5",size = 40)+
+  xlim(NA,0.23)+
+  #geom_treescale()+
+  theme_tree2()+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+  panel.background = element_blank(), axis.line = element_line(colour = "black"))
+phylo
+png("phylogeny_8_sp.png",width = 4000,height= 3000)
+phylo
+dev.off()
+
+phylo <- ggplot(tree,aes(x,y)) +
+  geom_tree(,color = "#8c887d") +
+  #geom_tiplab(aes(subset = node %in% c(1,2,3,4,5,6,7),label=dnds),geom="label",offset = 0.04,size = 3)+
+  geom_tiplab(geom = "text",fontface = "italic",family = "Times New Roman",color = "black",offset = 0.01, align = TRUE, linetype = NA,) +
+  geom_tiplab(aes(image = imgs), geom="image",offset = 0.06) +
+  geom_tiplab(aes(subset = node %in% c(3,5,7)),geom = "text",fontface = "italic",family = "Times New Roman",color = "coral",offset = 0.01, align = TRUE, linetype = NA,) +
+  geom_nodelab(aes(subset = node == 9, x = x,label = "20.34±0.86My"),nudge_x = -0.01,nudge_y = -0.15, geom = "text", color = "black",fill = "#DADBE5")+
+  geom_nodelab(aes(subset = node == 10, x = x,label = "13.99±0.63My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5")+
+  geom_nodelab(aes(subset = node == 11, x = x,label = "1.78±0.33My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5")+
+  geom_nodelab(aes(subset = node == 12, x = x,label = "10.92±0.51My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5")+
+  geom_nodelab(aes(subset = node == 13, x = x,label = "1.30±0.27My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5")+
+  geom_nodelab(aes(subset = node == 14, x = x,label = "2.66±0.22My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5")+
+  geom_nodelab(aes(subset = node == 15, x = x,label = "1.37±0.21My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5")+
+  xlim(-0.05,0.23)+
+  #geom_treescale()+
+  theme_tree()+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+  panel.background = element_blank(), axis.line = element_line(colour = "black"))
+phylo
+ggsave("gg_8_sp_phy.png",phylo,units = "px",height = 1200,width = 1800)
+
+
+
+ggplot(tree,aes(x,y)) +
+  geom_tree(,color = "#8c887d") +
+  #geom_tiplab(aes(subset = node %in% c(1,2,3,4,5,6,7),label=dnds),geom="label",offset = 0.04,size = 3)+
+  geom_tiplab(geom = "text",fontface = "italic",family = "Times New Roman",color = "black",offset = 0.01, align = TRUE, linetype = NA,) +
+  geom_tiplab(aes(subset = node %in% c(3,5,7)),geom = "text",fontface = "italic",family = "Times New Roman",color = "coral",offset = 0.01, align = TRUE, linetype = NA,) +
+  geom_nodelab(aes(subset = node == 9, x = x,label = "20.34±0.86My"),nudge_x = -0.01,nudge_y = -0.15, geom = "text", color = "black",fill = "#DADBE5")+
+  geom_nodelab(aes(subset = node == 10, x = x,label = "13.99±0.63My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5")+
+  geom_nodelab(aes(subset = node == 11, x = x,label = "1.78±0.33My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5")+
+  geom_nodelab(aes(subset = node == 12, x = x,label = "10.92±0.51My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5")+
+  geom_nodelab(aes(subset = node == 13, x = x,label = "1.30±0.27My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5")+
+  geom_nodelab(aes(subset = node == 14, x = x,label = "2.66±0.22My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5")+
+  geom_nodelab(aes(subset = node == 15, x = x,label = "1.37±0.21My"),nudge_x = -0.01,nudge_y = -0.15,geom = "text", color = "black",fill = "#DADBE5")+
+  xlim(NA,0.23)+
+  #geom_treescale()+
+  theme_tree()+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+  panel.background = element_blank(), axis.line = element_line(colour = "black"))
+```
+
+```{r}
+library(tidyverse)
+library(grid)
+pop <- c("S. lineatus","S. mimosarum","S. dumicola","S. dumicola","S. mimosarum","S. sarasinorum","S. tentoriicola","S. bicolor","S. sarasinorum","S. pacificus","S. africanus")
+lat <- c(30.805311,-18.868499,-19.654697,-28.052735,-28.887923,27.007796,-33.458177,-15.93,7.458205,22.000555,-27.900512)
+long <- c(34.825607,47.479210,17.327452,18.714993,30.042178,80,21.148091,25.336534,80.776628,79.603192,28.486073)
+social <- c("subsocial","social","social","social","social","social","subsocial","subsocial","social","subsocial","subsocial")
+data_type <- c("assembly","population","populaton","population","population","assembly","assembly","assembly","population","population","RNA")
+sample_df <- data.frame(pop,long,lat,social,data_type)%>%
+  mutate(sp = factor(pop,levels=c("S. pacificus","S. sarasinorum","S. bicolor","S. dumicola","S. tentoriicola","S. mimosarum","S. africanus","S. lineatus")))
+
+world_map <- ne_countries(scale = "small", returnclass = "sf")
+
+# Set the theme of our ggplot2 objects for this session
+theme_set(theme_bw())
+
+# The ggplot call is normal
+sample_map <- ggplot() + 
+  geom_sf(data = world_map,fill=NA,color = "grey60") +
+  geom_point(data = sample_df,aes(y=lat,x=long,color=sp))+
+  scale_color_manual(values = c("#e34de0","#5b0c9c","#A1A7F5","#BB381C","#FAA390","#e3a60b","#34b1c9","#0D3C3E"))+
+  #geom_label_repel(data = sample_df,aes(x=lat,y=long,label=rev(img)))+
+  xlim(c(-20, 85)) +
+  ylim(c(-35, 55)) +
+  xlab("longitude")+
+  ylab("latitude")+
+  theme(legend.text = element_text(face = "italic", family = "Times New Roman"),legend.title = element_text(), legend.background = element_blank(),legend.key = element_blank())+
+  guides(color=guide_legend(title="Species"))+
+  NULL
+
+sample_map
+ggsave("sample_map.png",sample_map,units = "px",height = 900,width = 1200)
+```
+
+```{r}
+library(ggpubr)
+figure_1<- ggarrange(phylo,sample_map,ncol = 2,labels = c("A","B"),widths = c(1,1),heights = c(1,3),align = "hv")
+ggsave("figure_1_up.png",figure_1,width = 2000,height = 2000, units = "px")
+figure_1
+```
+
+
+
+

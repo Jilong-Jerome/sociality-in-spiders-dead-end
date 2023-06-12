@@ -74,7 +74,16 @@ The obtained Ne_X/Ne_Auto ratio curves are polished by fitting splines in R
 
 ### Figure 1 - phylogeny and sample distributions
 
+[codes](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/figures/figure_1/figure1_sampledata.Rmd)
+
 ### Figure 2 - dN/dS estimations
+
+[codes](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/figures/figure_2/figure2_dn\ ds\ and\ estimates.Rmd)
 
 ### Figure 3 - PSMC results
 
+[codes](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/figures/figure_3/figure3_psmc.Rmd)
+
+### Boostraping for divergence time and social transition time
+
+[codes](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/figures/boostrapping/dNdS_interval.Rmd)

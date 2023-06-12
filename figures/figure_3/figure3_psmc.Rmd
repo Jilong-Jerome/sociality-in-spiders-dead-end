@@ -1,0 +1,658 @@
+---
+title: "figure_2_psmc"
+author: "Jilong"
+date: "3/3/2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggpubr)
+```
+
+```{r}
+psmc_df <- read_tsv("psmc_6sp_clean.tsv")
+pac_df <- read_tsv("PAC_correct.tsv")
+psmc_df <- rbind(psmc_df,pac_df)
+```
+```{r}
+psmc_df%>%
+  filter(Ne_Auto< 200)%>%
+  filter(Ne_X< 200)%>%
+  filter(Ne_Auto != 0)%>%
+  filter(Ne_X != 0)%>%
+  filter(years_before_present> 50000)%>%
+  #filter(sp %in% c("DUM","TENT"))%>%
+  #mutate(trans = ifelse(chrom=="Auto",0.8,1))%>%
+  mutate(species = factor(species,levels = c("LIN","MIM","BI","SARA","TENT","DUM","PAC"),labels = c("S. lineatus","S. mimosarum","S. bicolor","S. sarasinorum","S. tentoriicola","S. dumicola","S. pacificus")))%>%
+  filter(species %in% c("S. sarasinorum","S. pacificus","S. bicolor"))%>%
+  ggplot(aes(x=years_before_present))+
+  geom_point(aes(y = Ne_Auto,color = species),shape = 16)+
+  geom_line(aes(y = Ne_Auto,color = species))+
+  geom_point(aes(y = Ne_X,color = species),shape = 18,alpha = 0.8)+
+  geom_line(aes(y = Ne_X,color = species),alpha = 0.8)+
+  scale_x_continuous(trans = "log10")+
+  scale_y_continuous(trans = "log10")+
+  #scale_color_manual(values = c("#5b0c9c","#FAA390","#0D3C3E","#97EAEE","#A1A7F5","#BB381C"))+
+  scale_color_manual(values = c("#0D3C3E","#0D6CE5","#5b0c9c","#A1A7F5","#BB381C","#FAA390","#BB381C"))+
+  #scale_shape_manual(values = c(16,18))+
+  labs(color = "Species")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme_bw()
+
+psmc_df%>%
+  filter(Ne_Auto< 200)%>%
+  filter(Ne_X< 200)%>%
+  filter(Ne_Auto != 0)%>%
+  filter(Ne_X != 0)%>%
+  filter(years_before_present> 50000)%>%
+  #filter(sp %in% c("DUM","TENT"))%>%
+  #mutate(trans = ifelse(chrom=="Auto",0.8,1))%>%
+  mutate(species = factor(species,levels = c("LIN","MIM","BI","SARA","TENT","DUM"),labels = c("S. lineatus","S. mimosarum","S. bicolor","S. sarasinorum","S. tentoriicola","S. dumicola")))%>%
+  ggplot(aes(x=years_before_present))+
+  geom_line(aes(y = Ne_X/Ne_Auto,color = species))+
+  scale_x_continuous(trans = "log10")+
+  scale_y_continuous(trans = "log10")+
+  #scale_color_manual(values = c("#5b0c9c","#FAA390","#0D3C3E","#97EAEE","#A1A7F5","#BB381C"))+
+  scale_color_manual(values = c("#0D3C3E","#0D6CE5","#5b0c9c","#A1A7F5","#BB381C","#FAA390","#BB381C"))+
+  #scale_shape_manual(values = c(16,18))+
+  labs(color = "Species")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme_bw()
+```
+```{r}
+## Ne plot
+plot_df <- psmc_df%>%
+  filter(Ne_X > 0)%>%
+  filter(Ne_Auto > 0)%>%
+  filter(Ne_X < 200)%>%
+  filter(Ne_Auto < 200)%>%
+  filter(years_before_present > 50000)%>%
+  mutate(pair = ifelse(species%in% c("DUM","TENT"),1,
+                ifelse(species%in% c("BI","SARA"),2,3)))%>%
+  mutate(sociality = ifelse(species%in%c("DUM","MIM","SARA"),"social","subsocial"))
+## SRAA_BI_PAC
+p1 <- plot_df %>% ggplot()+
+  # PSMC estimates
+  #annotate(geom = "rect", xmin = 120000, xmax = 200000, ymin = 0, ymax = 200,
+  #         color = NA, fill = "#99B3B3", alpha = 0.4) +
+  annotate(geom = "rect", xmin = 120000, xmax = 600000, ymin = 0, ymax = 200,
+           color = NA, fill = "#99B3B3", alpha = 0.4) +
+  # dN/dS esitmates
+  geom_vline(xintercept = 260000,color = "#2178DA",size = 1)+
+  geom_vline(xintercept = 289000,color = "#2178DA",size = 1,linetype = "dashed")+
+  geom_vline(xintercept = 231000,color = "#2178DA",size = 1,linetype = "dashed")+
+  geom_vline(xintercept = 1300000,color = "#DC2064",size = 1)+
+  #Autosomal lines
+  geom_line(data = plot_df %>% filter(species=="DUM"),aes(x=years_before_present,y=Ne_Auto),size = 2,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="MIM") %>% filter(years_before_present > 250000),aes(x=years_before_present,y=Ne_Auto),size = 2,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="TENT"),aes(x=years_before_present,y=Ne_Auto),size = 2,alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=Ne_Auto),size = 2, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  #X chormosome lines
+  geom_line(data = plot_df %>% filter(species=="DUM"),aes(x=years_before_present,y=Ne_X),size = 1,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="MIM") %>% filter(years_before_present > 250000),aes(x=years_before_present,y=Ne_X),size = 1,alpha  = 0.7, color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="TENT"),aes(x=years_before_present,y=Ne_X),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=Ne_X),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  # Focus species
+  geom_line(data = plot_df %>% filter(species=="BI"),aes(x=years_before_present,y=Ne_X),size = 1,color = "#A1A7F5",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="BI"),aes(x=years_before_present,y=Ne_Auto),size = 2, color = "#A1A7F5",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="SARA") %>% filter(years_before_present > 100000),aes(x=years_before_present,y=Ne_X),color = "#5b0c9c",size = 1,show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="SARA")%>% filter(years_before_present > 100000),aes(x=years_before_present,y=Ne_Auto),color = "#5b0c9c",size = 2,show.legend = FALSE)+
+  #geom_text(aes(x = 268000, y = 100, label = "Social Transition"))+
+  #geom_vline(xintercept = 200000)+
+  scale_x_continuous(trans = "log10")+
+  scale_y_continuous(trans = "log10")+
+  #scale_color_manual(values = c("#5b0c9c","#EAF2F3","#EAF2F3","#EAF2F3","#A1A7F5","#EAF2F3"))+
+  #scale_shape_manual(values = c(16,18))+
+  ylab("Ne (*10e4)")+
+  xlab("")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+p1
+## DUM_TENT
+p2 <- plot_df %>% ggplot()+
+  # PSMC estimates
+  annotate(geom = "rect", xmin = 180000, xmax = 290000, ymin = 0, ymax = 200,
+           color = NA, fill = "#99B3B3", alpha = 0.4) +
+  # dN/dS esitmates
+  geom_vline(xintercept = 285000,color = "#2178DA",size = 1)+
+  geom_vline(xintercept = 1410000,color = "#DC2064",size = 1)+
+  #Autosomal lines
+  geom_line(data = plot_df %>% filter(species=="SARA")%>%filter(years_before_present > 100000),aes(x=years_before_present,y=Ne_Auto),size = 2,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="MIM") %>% filter(years_before_present > 250000),aes(x=years_before_present,y=Ne_Auto),size = 2,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="BI"),aes(x=years_before_present,y=Ne_Auto),size = 2,alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=Ne_Auto),size = 2, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  #X chormosome lines
+  geom_line(data = plot_df %>% filter(species=="SARA")%>%filter(years_before_present > 100000),aes(x=years_before_present,y=Ne_X),size = 1,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="MIM") %>% filter(years_before_present > 250000),aes(x=years_before_present,y=Ne_X),size = 1,alpha  = 0.7, color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="BI"),aes(x=years_before_present,y=Ne_X),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=Ne_X),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  # Focus species
+  geom_line(data = plot_df %>% filter(species=="TENT"),aes(x=years_before_present,y=Ne_X),size = 1,color = "#FAA390",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="TENT"),aes(x=years_before_present,y=Ne_Auto),size = 2, color = "#FAA390",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="DUM"),aes(x=years_before_present,y=Ne_X),color = "#BB381C",size = 1,show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="DUM"),aes(x=years_before_present,y=Ne_Auto),color = "#BB381C",size = 2,show.legend = FALSE)+
+  #geom_text(aes(x = 268000, y = 100, label = "Social Transition"))+
+  #geom_vline(xintercept = 200000)+
+  scale_x_continuous(trans = "log10")+
+  scale_y_continuous(trans = "log10")+
+  #scale_color_manual(values = c("#5b0c9c","#EAF2F3","#EAF2F3","#EAF2F3","#A1A7F5","#EAF2F3"))+
+  #scale_shape_manual(values = c(16,18))+
+  ylab("Ne (*10e4)")+
+  xlab("")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+p2
+## MIM - (AFR)
+p3 <- plot_df %>% ggplot()+
+  # PSMC estimates
+  annotate(geom = "rect", xmin = 370000, xmax = 550000, ymin = 0, ymax = 200,
+           color = NA, fill = "#99B3B3", alpha = 0.4) +
+  # dN/dS esitmates
+  geom_vline(xintercept = 288000,color = "#2178DA",size = 1)+
+  geom_vline(xintercept = 1950000,color = "#DC2064",size = 1)+
+  #Autosomal lines
+  geom_line(data = plot_df %>% filter(species=="DUM"),aes(x=years_before_present,y=Ne_Auto),size = 2,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="SARA")%>%filter(years_before_present > 100000),aes(x=years_before_present,y=Ne_Auto),size = 2,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="BI"),aes(x=years_before_present,y=Ne_Auto),size = 2,alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=Ne_Auto),size = 2, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="TENT"),aes(x=years_before_present,y=Ne_Auto),size = 2, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  #X chormosome lines
+  geom_line(data = plot_df %>% filter(species=="SARA")%>%filter(years_before_present > 100000),aes(x=years_before_present,y=Ne_X),size = 1,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="DUM"),aes(x=years_before_present,y=Ne_X),size = 1,alpha  = 0.7, color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="BI"),aes(x=years_before_present,y=Ne_X),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=Ne_X),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="TENT"),aes(x=years_before_present,y=Ne_X),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+    # Focus species
+  geom_line(data = plot_df %>% filter(species=="MIM") %>% filter(years_before_present > 250000),aes(x=years_before_present,y=Ne_Auto),size = 2,color = "#e3a60b",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="MIM") %>% filter(years_before_present > 250000),aes(x=years_before_present,y=Ne_X),size = 1,color = "#e3a60b",show.legend = FALSE)+
+  #geom_text(aes(x = 268000, y = 100, label = "Social Transition"))+
+  #geom_vline(xintercept = 200000)+
+  scale_x_continuous(trans = "log10")+
+  scale_y_continuous(trans = "log10")+
+  #scale_color_manual(values = c("#5b0c9c","#EAF2F3","#EAF2F3","#EAF2F3","#A1A7F5","#EAF2F3"))+
+  #scale_shape_manual(values = c(16,18))+
+  ylab("Ne (*10e4)")+
+  xlab("")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+p3
+# outgroup LIN
+p4 <- plot_df %>% ggplot()+
+  #Autosomal lines
+  geom_line(data = plot_df %>% filter(species=="DUM"),aes(x=years_before_present,y=Ne_Auto),size = 2,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="SARA")%>%filter(years_before_present > 100000),aes(x=years_before_present,y=Ne_Auto),size = 2,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="MIM") %>% filter(years_before_present > 250000),aes(x=years_before_present,y=Ne_Auto),size = 2,alpha = 0.7, color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="BI"),aes(x=years_before_present,y=Ne_Auto),size = 2,alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="TENT"),aes(x=years_before_present,y=Ne_Auto),size = 2, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  #X chormosome lines
+  geom_line(data = plot_df %>% filter(species=="SARA")%>%filter(years_before_present > 100000),aes(x=years_before_present,y=Ne_X),size = 1,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="DUM"),aes(x=years_before_present,y=Ne_X),size = 1,alpha  = 0.7, color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="MIM") %>% filter(years_before_present > 250000),aes(x=years_before_present,y=Ne_Auto),size = 1,alpha = 0.7, color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="BI"),aes(x=years_before_present,y=Ne_X),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="TENT"),aes(x=years_before_present,y=Ne_X),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+    # Focus species
+  geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=Ne_Auto),size = 2,color = "#0D3C3E",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=Ne_X),size = 1,color = "#0D3C3E",show.legend = FALSE)+
+  #geom_text(aes(x = 268000, y = 100, label = "Social Transition"))+
+  #geom_vline(xintercept = 200000)+
+  scale_x_continuous(trans = "log10")+
+  scale_y_continuous(trans = "log10")+
+  #scale_color_manual(values = c("#5b0c9c","#EAF2F3","#EAF2F3","#EAF2F3","#A1A7F5","#EAF2F3"))+
+  #scale_shape_manual(values = c(16,18))+
+  ylab("Ne (*10e4)")+
+  xlab("Years before present (YBP)")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+p4
+
+combo1 <- ggarrange(p1,p2,p3,p4,ncol = 1,labels = c("A","B","C","D"))
+combo1
+```
+```{r}
+## ratio plot
+## SRAA_BI_PAC
+r1 <- plot_df %>% ggplot()+
+  # PSMC estimates
+  annotate(geom = "rect", xmin = 120000, xmax = 200000, ymin = 0, ymax = 2,
+           color = NA, fill = "#99B3B3", alpha = 0.4) +
+  # dN/dS esitmates
+  geom_vline(xintercept = 268000,color = "#2178DA",size = 1)+
+  geom_vline(xintercept = 1300000,color = "#DC2064",size = 1)+
+  #ratio lines
+  geom_line(data = plot_df %>% filter(species=="DUM"),aes(x=years_before_present,`Ne_X/Ne_Auto`),size = 1,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="MIM") %>% filter(years_before_present > 250000),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="TENT"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  # Focus species
+  geom_line(data = plot_df %>% filter(species=="BI"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,color = "#A1A7F5",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="SARA") %>% filter(years_before_present > 100000),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),color = "#5b0c9c",size = 1,show.legend = FALSE)+
+  #geom_text(aes(x = 268000, y = 100, label = "Social Transition"))+
+  #geom_vline(xintercept = 200000)+
+  scale_x_continuous(trans = "log10")+
+  ylim(0,2)+
+  #scale_color_manual(values = c("#5b0c9c","#EAF2F3","#EAF2F3","#EAF2F3","#A1A7F5","#EAF2F3"))+
+  #scale_shape_manual(values = c(16,18))+
+  ylab("NeX/NeA")+
+  xlab("")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+r1
+## DUM TENT
+r2 <- plot_df %>% ggplot()+
+  # PSMC estimates
+  annotate(geom = "rect", xmin = 180000, xmax = 290000, ymin = 0, ymax = 2,
+           color = NA, fill = "#99B3B3", alpha = 0.4) +
+  # dN/dS esitmates
+  geom_vline(xintercept = 285000,color = "#2178DA",size = 1)+
+  geom_vline(xintercept = 1410000,color = "#DC2064",size = 1)+
+  #Autosomal lines
+  geom_line(data = plot_df %>% filter(species=="SARA")%>%filter(years_before_present > 100000),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="MIM") %>% filter(years_before_present > 250000),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="BI"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  # Focus species
+  geom_line(data = plot_df %>% filter(species=="TENT"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,color = "#FAA390",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="DUM"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),color = "#BB381C",size = 1,show.legend = FALSE)+
+  #geom_text(aes(x = 268000, y = 100, label = "Social Transition"))+
+  #geom_vline(xintercept = 200000)+
+  scale_x_continuous(trans = "log10")+
+  ylim(0,2)+
+  #scale_color_manual(values = c("#5b0c9c","#EAF2F3","#EAF2F3","#EAF2F3","#A1A7F5","#EAF2F3"))+
+  #scale_shape_manual(values = c(16,18))+
+  ylab("NeX/NeA")+
+  xlab("")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+r2
+r3 <- plot_df %>% ggplot()+
+  # PSMC estimates
+  annotate(geom = "rect", xmin = 370000, xmax = 550000, ymin = 0, ymax = 2,
+           color = NA, fill = "#99B3B3", alpha = 0.4) +
+  # dN/dS esitmates
+  geom_vline(xintercept = 288000,color = "#2178DA",size = 1)+
+  geom_vline(xintercept = 1950000,color = "#DC2064",size = 1)+
+  #ratiso
+  geom_line(data = plot_df %>% filter(species=="SARA")%>%filter(years_before_present > 100000),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="DUM"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,alpha  = 0.7, color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="BI"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="TENT"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+    # Focus species
+  geom_line(data = plot_df %>% filter(species=="MIM") %>% filter(years_before_present > 250000),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,color = "#e3a60b",show.legend = FALSE)+
+  scale_x_continuous(trans = "log10")+
+  ylim(0,2)+
+  ylab("NeX/NeA")+
+  xlab("")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+r3
+
+r4 <- plot_df %>% ggplot()+
+  #ratiso
+  geom_line(data = plot_df %>% filter(species=="SARA")%>%filter(years_before_present > 100000),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,alpha  = 0.7,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="DUM"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,alpha  = 0.7, color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="MIM") %>% filter(years_before_present > 250000),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,alpha = 0.7, color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="BI"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="TENT"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1, alpha  = 0.3 ,color = "#C9CECE",show.legend = FALSE)+
+    # Focus species
+  geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1 ,color = "#0D3C3E",show.legend = FALSE)+
+  scale_x_continuous(trans = "log10")+
+  ylim(0,2)+
+  ylab("NeX/NeA")+
+  xlab("Years before present (YBP)")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+
+r4
+combo2 <- ggarrange(r1,r2,r3,r4,ncol = 1,labels = c("E","F","G","H"))
+combo2
+```
+```{r}
+## Create legends
+
+p0 <- plot_df%>%
+  filter(species != "PAC")%>%
+  mutate(species = factor(species,levels = c("SARA","BI","DUM","TENT","MIM","LIN"),labels = c("S. sarasinorum", "S. bicolor","S. dumicola","S. tentoriicola","S. mimosarum","S. lineatus")))%>%
+  ggplot(aes(x= years_before_present,color = species))+
+  geom_line(aes(y = Ne_Auto))+
+  geom_line(aes(y = Ne_X))+
+  scale_color_manual(values = c("#5b0c9c","#A1A7F5","#BB381C","#FAA390","#e3a60b","#0D3C3E"))+
+  theme(legend.text = element_text(face = "italic", family = "Times New Roman",size = 12),legend.title = element_text(size = 14), legend.background = element_blank(),legend.key = element_blank(),legend.key.height = unit(3, "lines"),legend.position = "bottom")
+
+p0
+
+legend <- get_legend(p0)
+```
+```{r}
+final <- ggarrange(combo1,combo2,legend,ncol = 3,widths = c(1,1,0.3))
+final
+png("figure2.png",width = 800,height= 800)
+final
+dev.off()
+```
+
+```{r}
+## Ne plot
+plot_df <- psmc_df%>%
+  filter(Ne_X > 0)%>%
+  filter(Ne_Auto > 0)%>%
+  filter(Ne_X < 200)%>%
+  filter(Ne_Auto < 200)%>%
+  filter(years_before_present > 50000)%>%
+  mutate(pair = ifelse(species%in% c("DUM","TENT"),1,
+                ifelse(species%in% c("BI","SARA"),2,3)))%>%
+  mutate(sociality = ifelse(species%in%c("DUM","MIM","SARA"),"social","subsocial"))
+## SRAA_BI_PAC
+p1 <- plot_df %>% ggplot()+
+  geom_line(data = plot_df,aes(x=years_before_present,y=Ne_Auto),alpha = 0, show.legend = FALSE)+
+  # PSMC estimates
+  annotate(geom = "rect", xmin = 120000, xmax = 600000, ymin = 0, ymax = 200,
+           color = NA, fill = "#AB3131", alpha = 0.1) +
+  # dN/dS esitmates
+  geom_vline(xintercept = 260000,color = "#AB3131",size = 1)+
+  geom_vline(xintercept = 289000,color = "#AB3131",size = 1,linetype="dashed")+
+  geom_vline(xintercept = 231000,color = "#AB3131",size = 1,linetype ="dashed")+
+  geom_vline(xintercept = 1370000,color = "#3163B6",size = 1)+
+  geom_vline(xintercept = 1580000,color = "#3163B6",size = 1,linetype = "dashed")+
+  geom_vline(xintercept = 1160000,color = "#3163B6",size = 1,linetype = "dashed")+
+  # Focus species
+  geom_line(data = plot_df %>% filter(species=="BI"),aes(x=years_before_present,y=Ne_X),size = 1,color = "#3163B6",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="BI"),aes(x=years_before_present,y=Ne_Auto),size = 2, color = "#3163B6",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="SARA") %>% filter(years_before_present > 100000),aes(x=years_before_present,y=Ne_X),color = "#AB3131",size = 1,show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="SARA")%>% filter(years_before_present > 100000),aes(x=years_before_present,y=Ne_Auto),color = "#AB3131",size = 2,show.legend = FALSE)+
+  ylim(0,200)+
+  scale_x_continuous(trans = "log10")+
+  scale_y_continuous(trans = "log10")+
+  ylab("Ne (*10e4)")+
+  xlab("")+
+  labs(title = "S.sarasinorum - S.pacificus - S.bicolor")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"),
+plot.title = element_text(
+    family = "Times New Roman",
+    face = "italic"
+  ))
+p1
+## DUM_TENT
+p2 <- plot_df %>% ggplot()+
+  geom_line(data = plot_df,aes(x=years_before_present,y=Ne_Auto),alpha = 0, show.legend = FALSE)+
+  # PSMC estimates
+  annotate(geom = "rect", xmin = 141000, xmax = 420000, ymin = 0, ymax = 200,
+           color = NA, fill = "#AB3131", alpha = 0.1) +
+  # dN/dS esitmates
+  geom_vline(xintercept = 119000,color = "#AB3131",size = 1)+
+  geom_vline(xintercept = 72000,color = "#AB3131",size = 1,linetype="dashed")+
+  geom_vline(xintercept = 170000,color = "#AB3131",size = 1,linetype="dashed")+
+  geom_vline(xintercept = 1300000,color = "#3163B6",size = 1)+
+  geom_vline(xintercept = 1570000,color = "#3163B6",size = 1,linetype="dashed")+
+  geom_vline(xintercept = 1030000,color = "#3163B6",size = 1,linetype="dashed")+
+  # Focus species
+  geom_line(data = plot_df %>% filter(species=="TENT"),aes(x=years_before_present,y=Ne_X),size = 1,color = "#3163B6",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="TENT"),aes(x=years_before_present,y=Ne_Auto),size = 2, color = "#3163B6",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="DUM"),aes(x=years_before_present,y=Ne_X),color = "#AB3131",size = 1,show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="DUM"),aes(x=years_before_present,y=Ne_Auto),color = "#AB3131",size = 2,show.legend = FALSE)+
+  #geom_text(aes(x = 268000, y = 100, label = "Social Transition"))+
+  #geom_vline(xintercept = 200000)+
+  ylim(0,200)+
+  scale_x_continuous(trans = "log10")+
+  scale_y_continuous(trans = "log10")+
+  #scale_color_manual(values = c("#5b0c9c","#EAF2F3","#EAF2F3","#EAF2F3","#A1A7F5","#EAF2F3"))+
+  #scale_shape_manual(values = c(16,18))+
+  ylab("Ne (*10e4)")+
+  xlab("")+
+  labs(title = "S.dumicola - S.tentoriicola")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"),
+plot.title = element_text(
+    family = "Times New Roman",
+    face = "italic"
+  ))
+p2
+## MIM - (AFR)
+p3 <- plot_df %>% ggplot()+
+  geom_line(data = plot_df,aes(x=years_before_present,y=Ne_Auto),alpha = 0, show.legend = FALSE)+
+  # PSMC estimates
+  annotate(geom = "rect", xmin = 370000, xmax = 960000, ymin = 0, ymax = 200,
+           color = NA, fill = "#AB3131", alpha = 0.1) +
+  # dN/dS esitmates
+  geom_vline(xintercept = 279000,color = "#AB3131",size = 1)+
+  geom_vline(xintercept = 230000,color = "#AB3131",size = 1,linetype="dashed")+
+  geom_vline(xintercept = 332000,color = "#AB3131",size = 1,linetype="dashed")+
+  geom_vline(xintercept = 1780000,color = "#3163B6",size = 1)+
+  geom_vline(xintercept = 2110000,color = "#3163B6",size = 1,linetype = "dashed")+
+  geom_vline(xintercept = 1450000,color = "#3163B6",size = 1,linetype="dashed")+
+    # Focus species
+  geom_line(data = plot_df %>% filter(species=="MIM") %>% filter(years_before_present > 250000),aes(x=years_before_present,y=Ne_Auto),size = 2,color = "#AB3131",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="MIM") %>% filter(years_before_present > 250000),aes(x=years_before_present,y=Ne_X),size = 1,color = "#AB3131",show.legend = FALSE)+
+  #geom_text(aes(x = 268000, y = 100, label = "Social Transition"))+
+  #geom_vline(xintercept = 200000)+
+  ylim(0,200)+
+  scale_x_continuous(trans = "log10")+
+  scale_y_continuous(trans = "log10")+
+  #scale_color_manual(values = c("#5b0c9c","#EAF2F3","#EAF2F3","#EAF2F3","#A1A7F5","#EAF2F3"))+
+  #scale_shape_manual(values = c(16,18))+
+  ylab("Ne (*10e4)")+
+  xlab("")+
+  labs(title = "S.mimosarum - S.africanus")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"),
+plot.title = element_text(
+    family = "Times New Roman",
+    face = "italic"
+  ))
+p3
+# outgroup LIN
+p4 <- plot_df %>% ggplot()+
+    # Focus species
+  geom_line(data = plot_df,aes(x=years_before_present,y=Ne_Auto),alpha = 0, show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=Ne_Auto),size = 2,color = "#3163B6",show.legend = FALSE)+
+  geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=Ne_X),size = 1,color = "#3163B6",show.legend = FALSE)+
+  #geom_text(aes(x = 268000, y = 100, label = "Social Transition"))+
+  #geom_vline(xintercept = 200000)+
+  #expand_limits(y = c(0, 200))+
+  scale_x_continuous(trans = "log10")+
+  scale_y_continuous(trans = "log10")+
+  #scale_color_manual(values = c("#5b0c9c","#EAF2F3","#EAF2F3","#EAF2F3","#A1A7F5","#EAF2F3"))+
+  #scale_shape_manual(values = c(16,18))+
+  ylab("Ne (*10e4)")+
+  xlab("Years before present (YBP)")+
+  labs(title = "S.lineatus")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"),
+plot.title = element_text(
+    family = "Times New Roman",
+    face = "italic"
+  ))
+p4
+
+combo1 <- ggarrange(p1,p2,p3,p4,ncol = 1,labels = c("A","B","C","D"))
+combo1
+```
+```{r}
+## ratio plot
+## SRAA_BI_PAC
+SARA_curve <- plot_df %>% filter(species=="SARA")
+sara <- smooth.spline(log(SARA_curve$years_before_present,10),SARA_curve$`Ne_X/Ne_Auto`,spar =  0.5)
+low <- min(log(SARA_curve$years_before_present,10))
+up <- max(log(SARA_curve$years_before_present,10))
+x.pred <- seq(low, up, length.out = 200)
+y.pred <- predict(sara, x.pred)$y
+sara_predictions <- data.frame(x = x.pred, y = y.pred)
+
+BI_curve <- plot_df %>% filter(species=="BI")
+bi <- smooth.spline(log(BI_curve$years_before_present,10),BI_curve$`Ne_X/Ne_Auto`,spar =  0.5)
+low <- min(log(BI_curve$years_before_present,10))
+up <- max(log(BI_curve$years_before_present,10))
+x.pred <- seq(low, up, length.out = 200)
+y.pred <- predict(bi, x.pred)$y
+bi_predictions <- data.frame(x = x.pred, y = y.pred)
+
+r1 <- plot_df %>% ggplot()+
+  geom_line(data = plot_df,aes(x=years_before_present,y=`Ne_X/Ne_Auto`),alpha = 0, show.legend = FALSE)+
+  # PSMC estimates
+  annotate(geom = "rect", xmin = 120000, xmax = 600000, ymin = 0, ymax = 2,
+           color = NA, fill = "#AB3131", alpha = 0.1) +
+  # dN/dS esitmates
+  geom_vline(xintercept = 260000,color = "#AB3131",size = 1)+
+  geom_vline(xintercept = 289000,color = "#AB3131",size = 1,linetype="dashed")+
+  geom_vline(xintercept = 231000,color = "#AB3131",size = 1,linetype ="dashed")+
+  geom_vline(xintercept = 1370000,color = "#3163B6",size = 1)+
+  geom_vline(xintercept = 1580000,color = "#3163B6",size = 1,linetype = "dashed")+
+  geom_vline(xintercept = 1160000,color = "#3163B6",size = 1,linetype = "dashed")+
+  # Focus species
+  #geom_line(data = plot_df %>% filter(species=="BI"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,color = "#A1A7F5",show.legend = FALSE)+
+  geom_line(data = bi_predictions,aes(x=10^x,y=y),color = "#3163B6",size = 1,show.legend = FALSE)+
+  #geom_line(data = plot_df %>% filter(species=="SARA") %>% filter(years_before_present > 100000),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),color = "#5b0c9c",size = 1,show.legend = FALSE)+
+  geom_line(data = sara_predictions %>% filter(10^x > 100000),aes(x=10^x,y=y),color = "#AB3131",size = 1,show.legend = FALSE)+
+  #geom_text(aes(x = 268000, y = 100, label = "Social Transition"))+
+  #geom_vline(xintercept = 200000)+
+  scale_x_continuous(trans = "log10")+
+  ylim(0,2)+
+  #scale_color_manual(values = c("#5b0c9c","#EAF2F3","#EAF2F3","#EAF2F3","#A1A7F5","#EAF2F3"))+
+  #scale_shape_manual(values = c(16,18))+
+  ylab("NeX/NeA")+
+  xlab("")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(
+    panel.grid.major = element_blank(), 
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(), 
+    axis.line = element_line(colour = "black"),
+    text = element_text(size = 14))
+
+r1
+## DUM TENT
+DUM_curve <- plot_df %>% filter(species=="DUM")
+dum <- smooth.spline(log(DUM_curve$years_before_present,10),DUM_curve$`Ne_X/Ne_Auto`,spar =  0.5)
+low <- min(log(DUM_curve$years_before_present,10))
+up <- max(log(DUM_curve$years_before_present,10))
+x.pred <- seq(low, up, length.out = 200)
+y.pred <- predict(dum, x.pred)$y
+dum_predictions <- data.frame(x = x.pred, y = y.pred)
+
+curve <- plot_df %>% filter(species=="TENT")
+tent <- smooth.spline(log(curve$years_before_present,10),curve$`Ne_X/Ne_Auto`,spar =  0.5)
+low <- min(log(curve$years_before_present,10))
+up <- max(log(curve$years_before_present,10))
+x.pred <- seq(low, up, length.out = 200)
+y.pred <- predict(tent, x.pred)$y
+tent_predictions <- data.frame(x = x.pred, y = y.pred)
+
+r2 <- plot_df %>% ggplot()+
+  geom_line(data = plot_df,aes(x=years_before_present,y=`Ne_X/Ne_Auto`),alpha = 0, show.legend = FALSE)+
+  # PSMC estimates
+  annotate(geom = "rect", xmin = 141000, xmax = 420000, ymin = 0, ymax = 2,
+           color = NA, fill = "#AB3131", alpha = 0.1) +
+  # dN/dS esitmates
+  geom_vline(xintercept = 119000,color = "#AB3131",size = 1)+
+  geom_vline(xintercept = 72000,color = "#AB3131",size = 1,linetype="dashed")+
+  geom_vline(xintercept = 170000,color = "#AB3131",size = 1,linetype="dashed")+
+  geom_vline(xintercept = 1300000,color = "#3163B6",size = 1)+
+  geom_vline(xintercept = 1570000,color = "#3163B6",size = 1,linetype="dashed")+
+  geom_vline(xintercept = 1030000,color = "#3163B6",size = 1,linetype="dashed")+
+  # Focus species
+  #geom_line(data = plot_df %>% filter(species=="TENT"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,color = "#FAA390",show.legend = FALSE)+
+  geom_line(data = tent_predictions,aes(x=10^x,y=y),color = "#3163B6",size = 1,show.legend = FALSE)+
+  #geom_line(data = plot_df %>% filter(species=="DUM"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),color = "#BB381C",size = 1,show.legend = FALSE)+
+  geom_line(data = dum_predictions,aes(x=10^x,y=y),color = "#AB3131",size = 1,show.legend = FALSE)+
+  #geom_text(aes(x = 268000, y = 100, label = "Social Transition"))+
+  #geom_vline(xintercept = 200000)+
+  scale_x_continuous(trans = "log10")+
+  ylim(0,2)+
+  #scale_color_manual(values = c("#5b0c9c","#EAF2F3","#EAF2F3","#EAF2F3","#A1A7F5","#EAF2F3"))+
+  #scale_shape_manual(values = c(16,18))+
+  ylab("NeX/NeA")+
+  xlab("")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+r2
+
+curve <- plot_df %>% filter(species=="MIM")
+mim <- smooth.spline(log(curve$years_before_present,10),curve$`Ne_X/Ne_Auto`,spar =  0.5)
+low <- min(log(curve$years_before_present,10))
+up <- max(log(curve$years_before_present,10))
+x.pred <- seq(low, up, length.out = 200)
+y.pred <- predict(mim, x.pred)$y
+mim_predictions <- data.frame(x = x.pred, y = y.pred)
+
+r3 <- plot_df %>% ggplot()+
+  geom_line(data = plot_df,aes(x=years_before_present,y=`Ne_X/Ne_Auto`),alpha = 0, show.legend = FALSE)+
+  # PSMC estimates
+  annotate(geom = "rect", xmin = 370000, xmax = 960000, ymin = 0, ymax = 2,
+           color = NA, fill = "#AB3131", alpha = 0.1) +
+  # dN/dS esitmates
+  geom_vline(xintercept = 279000,color = "#AB3131",size = 1)+
+  geom_vline(xintercept = 230000,color = "#AB3131",size = 1,linetype="dashed")+
+  geom_vline(xintercept = 332000,color = "#AB3131",size = 1,linetype="dashed")+
+  geom_vline(xintercept = 1780000,color = "#3163B6",size = 1)+
+  geom_vline(xintercept = 2110000,color = "#3163B6",size = 1,linetype = "dashed")+
+  geom_vline(xintercept = 1450000,color = "#3163B6",size = 1,linetype="dashed")+
+    # Focus species
+  #geom_line(data = plot_df %>% filter(species=="MIM") %>% filter(years_before_present > 250000),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1,color = "#e3a60b",show.legend = FALSE)+
+  geom_line(data = mim_predictions %>% filter(10^x > 250000),aes(x=10^x,y=y),color = "#AB3131",size = 1,show.legend = FALSE)+
+  scale_x_continuous(trans = "log10")+
+  ylim(0,2)+
+  ylab("NeX/NeA")+
+  xlab("")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+r3
+curve <- plot_df %>% filter(species=="LIN")
+lin <- smooth.spline(log(curve$years_before_present,10),curve$`Ne_X/Ne_Auto`,spar =  0.5)
+low <- min(log(curve$years_before_present,10))
+up <- max(log(curve$years_before_present,10))
+x.pred <- seq(low, up, length.out = 200)
+y.pred <- predict(lin, x.pred)$y
+lin_predictions <- data.frame(x = x.pred, y = y.pred)
+
+r4 <- plot_df %>% ggplot()+
+  geom_line(data = plot_df,aes(x=years_before_present,y=`Ne_X/Ne_Auto`),alpha = 0, show.legend = FALSE)+
+    # Focus species
+  #geom_line(data = plot_df %>% filter(species=="LIN"),aes(x=years_before_present,y=`Ne_X/Ne_Auto`),size = 1 ,color = "#0D3C3E",show.legend = FALSE)+
+  geom_line(data = lin_predictions,aes(x=10^x,y=y),color = "#3163B6",size = 1,show.legend = FALSE)+
+  scale_x_continuous(trans = "log10")+
+  ylim(0,2)+
+  ylab("NeX/NeA")+
+  xlab("Years before present (YBP)")+
+#  facet_wrap(~sp,nrow = 4)+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+
+r4
+combo2 <- ggarrange(r1,r2,r3,r4,ncol = 1,labels = c("E","F","G","H"))
+combo2 <- ggarrange(r1,r2,r3,r4,ncol = 1)
+combo2
+```
+```{r}
+final <- ggarrange(combo1,combo2,ncol = 2)
+final
+png("figure2_nobackground.png",width = 800,height= 800)
+final
+dev.off()
+```
+
+
+```{r}
+DUM_curve <- plot_df %>% filter(species=="SARA")
+modlel <- smooth.spline(log(DUM_curve$years_before_present,10),DUM_curve$`Ne_X/Ne_Auto`,spar =  0.5)
+plot(log(DUM_curve$years_before_present,10),DUM_curve$`Ne_X/Ne_Auto`)
+lines(modlel,col = "blue")
+```
+
