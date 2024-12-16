@@ -1,0 +1,46 @@
+# Tag identifying file association.
+TAG: jeppebayer:EcoGenetics,population_genetics,mapping:workflowconfiguration
+# The name of the relevant project account.
+account: spider2
+# Taxonomic group
+taxonomic_group: Spider
+# Name of species being analyzed
+species_name: Stegodyphus mimosarum
+# Path to reference genome file in FASTA format
+#reference_genome_path: /faststorage/project/spider2/social_spiders_2020/people/jilong/chapter3_dnm/data/genome/MIM_ncbi_chromosome.fa
+reference_genome_path: /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/final_3d/MIM/MIM_hifi_hic_scaffolded_trim.fa
+# Directory for intermediary files.
+working_directory_path: /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/chapter1_social/steps/population_vcf
+# # Directory for final output files. (If left empty, output file will be placed within 'working_directory_path')
+output_directory_path: /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/chapter1_social/steps/population_vcf/results
+# AdapterRemoval settings.
+adapterremoval_settings:
+  min_quality: 25
+  min_length: 20
+  adaptersequence1: AAGTCGGAGGCCAAGCGGTCTTAGGAAGACAA
+  adaptersequence2: AAGTCGGATCGTAGCCATGTCGTTCTGTGAGCCAAGGAGTTG
+# Samtools filter settings.
+filter_settings:
+  flags_excluded: 3844
+  flags_required: 
+  min_mq: 20
+# List of path to sample folders containing resequencing data.
+sample_lists:
+  -
+    group_name: stables
+    sample_folder_list:
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_mimosarum/Antananarivo/a132
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_mimosarum/Antananarivo/a133
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_mimosarum/Antananarivo/a134
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_mimosarum/Antananarivo/a135
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_mimosarum/Antananarivo/a136
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_mimosarum/Antananarivo/a137
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_mimosarum/Antananarivo/a138
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_mimosarum/Wee/b145
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_mimosarum/Wee/b146
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_mimosarum/Wee/b147
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_mimosarum/Wee/b148
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_mimosarum/Wee/b149
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_mimosarum/Wee/b151
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_mimosarum/Wee/b152
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_mimosarum/Wee/b153

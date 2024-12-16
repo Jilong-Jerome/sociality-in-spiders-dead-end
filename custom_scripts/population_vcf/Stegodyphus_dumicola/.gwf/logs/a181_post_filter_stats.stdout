@@ -1,0 +1,25 @@
+START: Thu Dec  5 10:36:22 PM CET 2024
+JobID: 50325283
+END: Thu Dec  5 10:49:37 PM CET 2024
+Name                : a181_post_filter_stats
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1043
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:10
+Start               : 2024-12-05T22:36:21
+End                 : --
+Waited              : 00:00:24
+Reserved walltime   : 12:00:00
+Used walltime       : 00:13:16
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 40G
+Max Mem used        : 14.21M (cn-1043)
+Max Disk Write      : 1.00M (cn-1043)
+Max Disk Read       : 71.58G (cn-1043)

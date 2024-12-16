@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:48:22 PM CET 2024
+JobID: 50325332
+END: Thu Dec  5 04:11:23 PM CET 2024
+Name                : a645_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : s21n81
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:10
+Start               : 2024-12-05T15:48:18
+End                 : --
+Waited              : 00:06:08
+Reserved walltime   : 12:00:00
+Used walltime       : 00:23:05
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 78.30M (s21n81)
+Max Disk Write      : 95.86G (s21n81)
+Max Disk Read       : 41.77G (s21n81)

@@ -1,0 +1,25 @@
+START: Thu Dec  5 06:24:57 PM CET 2024
+JobID: 50324821
+END: Fri Dec  6 01:10:59 AM CET 2024
+Name                : b151_paired_alignment
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1034
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:55
+Start               : 2024-12-05T18:24:57
+End                 : --
+Waited              :   01:36:15
+Reserved walltime   : 2-00:00:00
+Used walltime       :   06:46:02
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 25.19G (cn-1034)
+Max Disk Write      : 398.88G (cn-1034)
+Max Disk Read       : 484.14G (cn-1034)

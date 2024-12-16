@@ -1,0 +1,25 @@
+START: Thu Dec  5 07:18:17 PM CET 2024
+JobID: 50325564
+END: Thu Dec  5 09:42:13 PM CET 2024
+Name                : b357_paired_alignment
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1020
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:12
+Start               : 2024-12-05T19:18:15
+End                 : --
+Waited              :   02:26:41
+Reserved walltime   : 2-00:00:00
+Used walltime       :   02:23:58
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 28.83G (cn-1020)
+Max Disk Write      : 113.32G (cn-1020)
+Max Disk Read       : 146.65G (cn-1020)

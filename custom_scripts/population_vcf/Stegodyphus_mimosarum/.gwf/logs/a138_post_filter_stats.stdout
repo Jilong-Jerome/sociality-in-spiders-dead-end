@@ -1,0 +1,25 @@
+START: Fri Dec  6 04:37:58 AM CET 2024
+JobID: 50324722
+END: Fri Dec  6 05:17:02 AM CET 2024
+Name                : a138_post_filter_stats
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1053
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:54
+Start               : 2024-12-06T04:37:57
+End                 : --
+Waited              : 00:00:43
+Reserved walltime   : 12:00:00
+Used walltime       : 00:39:05
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 40G
+Max Mem used        : 60.46M (cn-1053)
+Max Disk Write      : 1.00M (cn-1053)
+Max Disk Read       : 179.43G (cn-1053)

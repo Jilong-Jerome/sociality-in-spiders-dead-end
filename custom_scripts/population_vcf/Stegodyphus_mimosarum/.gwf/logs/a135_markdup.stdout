@@ -1,0 +1,25 @@
+START: Fri Dec  6 02:31:23 AM CET 2024
+JobID: 50324594
+END: Fri Dec  6 02:56:04 AM CET 2024
+Name                : a135_markdup
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1034
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:45
+Start               : 2024-12-06T02:31:23
+End                 : --
+Waited              :   00:00:12
+Reserved walltime   : 1-00:00:00
+Used walltime       :   00:24:41
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 15.92G (cn-1034)
+Max Disk Write      : 344.55G (cn-1034)
+Max Disk Read       : 450.52G (cn-1034)

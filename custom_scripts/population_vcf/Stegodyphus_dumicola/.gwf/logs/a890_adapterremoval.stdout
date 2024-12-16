@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:48:26 PM CET 2024
+JobID: 50325376
+END: Thu Dec  5 04:15:12 PM CET 2024
+Name                : a890_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1049
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:11
+Start               : 2024-12-05T15:48:18
+End                 : --
+Waited              : 00:06:07
+Reserved walltime   : 12:00:00
+Used walltime       : 00:26:54
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 85.17M (cn-1049)
+Max Disk Write      : 90.72G (cn-1049)
+Max Disk Read       : 41.95G (cn-1049)

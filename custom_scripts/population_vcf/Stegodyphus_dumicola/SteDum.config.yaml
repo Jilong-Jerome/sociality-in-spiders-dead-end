@@ -1,0 +1,51 @@
+# Tag identifying file association.
+TAG: jeppebayer:EcoGenetics,population_genetics,mapping:workflowconfiguration
+# The name of the relevant project account.
+account: spider2
+# Taxonomic group
+taxonomic_group: Spider
+# Name of species being analyzed
+species_name: Stegodyphus dumicola
+# Path to reference genome file in FASTA format
+#reference_genome_path: /faststorage/project/spider2/social_spiders_2020/people/jilong/chapter3_dnm/data/genome/DUM_ncbi_chromosome.fa
+reference_genome_path: /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/steps/3D_dna/final_3d/DUM/DUM_hifi_hic_scaffolded_trim.fa
+# Directory for intermediary files.
+working_directory_path: /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/chapter1_social/steps/population_vcf
+# # Directory for final output files. (If left empty, output file will be placed within 'working_directory_path')
+output_directory_path: /home/jilong/spider2/faststorage/social_spiders_2020/people/jilong/chapter1_social/steps/population_vcf/results
+# AdapterRemoval settings.
+adapterremoval_settings:
+  min_quality: 25
+  min_length: 20
+  adaptersequence1: AAGTCGGAGGCCAAGCGGTCTTAGGAAGACAA
+  adaptersequence2: AAGTCGGATCGTAGCCATGTCGTTCTGTGAGCCAAGGAGTTG
+# Samtools filter settings.
+filter_settings:
+  flags_excluded: 3844
+  flags_required: 
+  min_mq: 20
+# List of path to sample folders containing resequencing data.
+sample_lists:
+  -
+    group_name: stables
+    sample_folder_list:
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Karasburg/a163
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Karasburg/a166
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Karasburg/a169
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Karasburg/a178
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Karasburg/a181
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Karasburg/a455
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Karasburg/a488
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Karasburg/a645
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Karasburg/a737
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Karasburg/a890
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Otawi/b122
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Otawi/b144
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Otawi/b162
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Otawi/b186
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Otawi/b231
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Otawi/b266
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Otawi/b297
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Otawi/b317
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Otawi/b357
+      - /faststorage/project/spider2/social_spiders_2020/data/BACKUP/BGIseq_data/population_data/S_dumicola/Otawi/b415

@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:42:23 PM CET 2024
+JobID: 50325175
+END: Thu Dec  5 04:51:29 PM CET 2024
+Name                : Stegodyphus_dumicola_index_reference
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : s21n82
+Cores               : 1
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:10
+Start               : 2024-12-05T15:42:18
+End                 : --
+Waited              : 00:00:08
+Reserved walltime   : 08:00:00
+Used walltime       : 01:09:11
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 10G
+Max Mem used        : 4.90G (s21n82)
+Max Disk Write      : 8.96G (s21n82)
+Max Disk Read       : 16.46G (s21n82)

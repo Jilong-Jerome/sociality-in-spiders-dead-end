@@ -1,0 +1,25 @@
+START: Fri Dec  6 04:08:07 AM CET 2024
+JobID: 50324531
+END: Fri Dec  6 04:09:15 AM CET 2024
+Name                : a132_extract_unmapped_reads
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : s21n81
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:27
+Start               : 2024-12-06T04:08:07
+End                 : --
+Waited              : 00:00:04
+Reserved walltime   : 12:00:00
+Used walltime       : 00:01:08
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 30G
+Max Mem used        : 16.30M (s21n81)
+Max Disk Write      : 296.79M (s21n81)
+Max Disk Read       : 76.81G (s21n81)

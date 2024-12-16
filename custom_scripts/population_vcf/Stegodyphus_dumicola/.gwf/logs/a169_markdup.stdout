@@ -1,0 +1,25 @@
+START: Fri Dec  6 03:39:13 AM CET 2024
+JobID: 50325232
+END: Fri Dec  6 03:55:53 AM CET 2024
+Name                : a169_markdup
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1002
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:10
+Start               : 2024-12-06T03:39:12
+End                 : --
+Waited              :   00:00:33
+Reserved walltime   : 1-00:00:00
+Used walltime       :   00:16:41
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 13.77G (cn-1002)
+Max Disk Write      : 277.15G (cn-1002)
+Max Disk Read       : 358.26G (cn-1002)

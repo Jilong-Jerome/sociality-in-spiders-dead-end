@@ -1,0 +1,25 @@
+START: Fri Dec  6 01:00:29 AM CET 2024
+JobID: 50324763
+END: Fri Dec  6 01:05:49 AM CET 2024
+Name                : b146_filtering
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1016
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:55
+Start               : 2024-12-06T01:00:25
+End                 : --
+Waited              :   00:00:44
+Reserved walltime   : 1-00:00:00
+Used walltime       :   00:05:24
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 28.39M (cn-1016)
+Max Disk Write      : 58.78G (cn-1016)
+Max Disk Read       : 128.87G (cn-1016)

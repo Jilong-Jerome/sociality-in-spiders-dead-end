@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:50:25 PM CET 2024
+JobID: 50325559
+END: Thu Dec  5 04:09:31 PM CET 2024
+Name                : b357_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1044
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:12
+Start               : 2024-12-05T15:50:23
+End                 : --
+Waited              : 00:08:11
+Reserved walltime   : 12:00:00
+Used walltime       : 00:19:08
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 85.82M (cn-1044)
+Max Disk Write      : 96.48G (cn-1044)
+Max Disk Read       : 41.73G (cn-1044)

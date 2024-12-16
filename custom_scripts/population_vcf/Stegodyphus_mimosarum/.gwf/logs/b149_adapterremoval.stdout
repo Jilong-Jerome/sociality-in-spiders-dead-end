@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:44:18 PM CET 2024
+JobID: 50324802
+END: Thu Dec  5 04:23:36 PM CET 2024
+Name                : b149_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1034
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:55
+Start               : 2024-12-05T15:44:17
+End                 : --
+Waited              : 00:02:22
+Reserved walltime   : 12:00:00
+Used walltime       : 00:39:19
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 91.37M (cn-1034)
+Max Disk Write      : 258.89G (cn-1034)
+Max Disk Read       : 84.73G (cn-1034)

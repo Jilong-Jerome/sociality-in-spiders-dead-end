@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:42:21 PM CET 2024
+JobID: 50324516
+END: Thu Dec  5 04:48:37 PM CET 2024
+Name                : Stegodyphus_mimosarum_index_reference
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : s21n32
+Cores               : 1
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:27
+Start               : 2024-12-05T15:42:18
+End                 : --
+Waited              : 00:00:51
+Reserved walltime   : 08:00:00
+Used walltime       : 01:06:19
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 10G
+Max Mem used        : 4.41G (s21n32)
+Max Disk Write      : 8.06G (s21n32)
+Max Disk Read       : 14.82G (s21n32)

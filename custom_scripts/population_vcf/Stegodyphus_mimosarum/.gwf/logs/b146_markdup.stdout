@@ -1,0 +1,25 @@
+START: Fri Dec  6 12:30:27 AM CET 2024
+JobID: 50324760
+END: Fri Dec  6 12:59:33 AM CET 2024
+Name                : b146_markdup
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1007
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:55
+Start               : 2024-12-06T00:30:24
+End                 : --
+Waited              :   00:00:23
+Reserved walltime   : 1-00:00:00
+Used walltime       :   00:29:09
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 13.93G (cn-1007)
+Max Disk Write      : 338.40G (cn-1007)
+Max Disk Read       : 440.58G (cn-1007)

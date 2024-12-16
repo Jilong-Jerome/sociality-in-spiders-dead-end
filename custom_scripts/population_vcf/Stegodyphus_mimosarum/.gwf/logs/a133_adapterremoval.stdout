@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:42:27 PM CET 2024
+JobID: 50324541
+END: Thu Dec  5 04:21:11 PM CET 2024
+Name                : a133_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1050
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:27
+Start               : 2024-12-05T15:42:18
+End                 : --
+Waited              : 00:00:51
+Reserved walltime   : 12:00:00
+Used walltime       : 00:38:53
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 83.32M (cn-1050)
+Max Disk Write      : 186.44G (cn-1050)
+Max Disk Read       : 78.08G (cn-1050)

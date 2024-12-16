@@ -1,0 +1,25 @@
+START: Thu Dec  5 09:46:33 PM CET 2024
+JobID: 50325373
+END: Thu Dec  5 10:16:34 PM CET 2024
+Name                : a737_pre_filter_stats
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : s21n64
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:11
+Start               : 2024-12-05T21:46:26
+End                 : --
+Waited              : 00:00:17
+Reserved walltime   : 12:00:00
+Used walltime       : 00:30:09
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 40G
+Max Mem used        : 14.05M (s21n64)
+Max Disk Write      : 1.00M (s21n64)
+Max Disk Read       : 89.69G (s21n64)

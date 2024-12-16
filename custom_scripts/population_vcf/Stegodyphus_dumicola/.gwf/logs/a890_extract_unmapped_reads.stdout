@@ -1,0 +1,25 @@
+START: Thu Dec  5 09:56:28 PM CET 2024
+JobID: 50325388
+END: Thu Dec  5 09:56:53 PM CET 2024
+Name                : a890_extract_unmapped_reads
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : s21n42
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:11
+Start               : 2024-12-05T21:56:25
+End                 : --
+Waited              : 00:00:44
+Reserved walltime   : 12:00:00
+Used walltime       : 00:00:29
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 30G
+Max Mem used        : 9.15M (s21n42)
+Max Disk Write      : 122.95M (s21n42)
+Max Disk Read       : 29.25G (s21n42)

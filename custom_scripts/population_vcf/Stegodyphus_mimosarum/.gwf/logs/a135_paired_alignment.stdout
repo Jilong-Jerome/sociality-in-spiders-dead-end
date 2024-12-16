@@ -1,0 +1,25 @@
+START: Thu Dec  5 05:38:58 PM CET 2024
+JobID: 50324589
+END: Fri Dec  6 02:18:41 AM CET 2024
+Name                : a135_paired_alignment
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1013
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:45
+Start               : 2024-12-05T17:38:56
+End                 : --
+Waited              :   00:50:14
+Reserved walltime   : 2-00:00:00
+Used walltime       :   08:39:45
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 25.73G (cn-1013)
+Max Disk Write      : 443.49G (cn-1013)
+Max Disk Read       : 567.87G (cn-1013)

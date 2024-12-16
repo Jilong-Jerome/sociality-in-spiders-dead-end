@@ -1,0 +1,25 @@
+START: Thu Dec  5 09:46:27 PM CET 2024
+JobID: 50325639
+END: Thu Dec  5 10:07:59 PM CET 2024
+Name                : b266_pre_filter_stats
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1044
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:13
+Start               : 2024-12-05T21:46:26
+End                 : --
+Waited              : 00:00:25
+Reserved walltime   : 12:00:00
+Used walltime       : 00:21:33
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 40G
+Max Mem used        : 14.74M (cn-1044)
+Max Disk Write      : 1.00M (cn-1044)
+Max Disk Read       : 87.10G (cn-1044)

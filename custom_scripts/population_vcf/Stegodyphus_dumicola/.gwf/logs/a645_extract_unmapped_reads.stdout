@@ -1,0 +1,25 @@
+START: Thu Dec  5 09:38:27 PM CET 2024
+JobID: 50325344
+END: Thu Dec  5 09:38:52 PM CET 2024
+Name                : a645_extract_unmapped_reads
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1004
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:10
+Start               : 2024-12-05T21:38:26
+End                 : --
+Waited              : 00:00:42
+Reserved walltime   : 12:00:00
+Used walltime       : 00:00:26
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 30G
+Max Mem used        : 15.48M (cn-1004)
+Max Disk Write      : 195.72M (cn-1004)
+Max Disk Read       : 31.90G (cn-1004)

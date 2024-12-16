@@ -1,0 +1,25 @@
+START: Thu Dec  5 06:32:12 PM CET 2024
+JobID: 50324828
+END: Fri Dec  6 12:11:15 AM CET 2024
+Name                : b152_paired_alignment
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1020
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:55
+Start               : 2024-12-05T18:32:11
+End                 : --
+Waited              :   01:43:29
+Reserved walltime   : 2-00:00:00
+Used walltime       :   05:39:04
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 24.55G (cn-1020)
+Max Disk Write      : 380.67G (cn-1020)
+Max Disk Read       : 469.24G (cn-1020)

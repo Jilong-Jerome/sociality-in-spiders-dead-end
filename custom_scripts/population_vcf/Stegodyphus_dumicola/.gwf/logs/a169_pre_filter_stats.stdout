@@ -1,0 +1,25 @@
+START: Fri Dec  6 03:56:09 AM CET 2024
+JobID: 50325241
+END: Fri Dec  6 04:26:35 AM CET 2024
+Name                : a169_pre_filter_stats
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1040
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:10
+Start               : 2024-12-06T03:56:05
+End                 : --
+Waited              : 00:00:10
+Reserved walltime   : 12:00:00
+Used walltime       : 00:30:30
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 40G
+Max Mem used        : 21.05M (cn-1040)
+Max Disk Write      : 1.00M (cn-1040)
+Max Disk Read       : 184.23G (cn-1040)

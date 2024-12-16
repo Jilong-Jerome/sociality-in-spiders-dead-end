@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:43:19 PM CET 2024
+JobID: 50324744
+END: Thu Dec  5 04:18:18 PM CET 2024
+Name                : b145_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1058
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:54
+Start               : 2024-12-05T15:43:18
+End                 : --
+Waited              : 00:01:24
+Reserved walltime   : 12:00:00
+Used walltime       : 00:35:00
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 94.76M (cn-1058)
+Max Disk Write      : 206.82G (cn-1058)
+Max Disk Read       : 78.17G (cn-1058)

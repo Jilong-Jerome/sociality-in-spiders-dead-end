@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:45:18 PM CET 2024
+JobID: 50324826
+END: Thu Dec  5 04:21:44 PM CET 2024
+Name                : b152_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1057
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:55
+Start               : 2024-12-05T15:45:17
+End                 : --
+Waited              : 00:03:22
+Reserved walltime   : 12:00:00
+Used walltime       : 00:36:27
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 91.67M (cn-1057)
+Max Disk Write      : 208.86G (cn-1057)
+Max Disk Read       : 87.37G (cn-1057)

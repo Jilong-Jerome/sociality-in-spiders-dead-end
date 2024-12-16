@@ -1,0 +1,25 @@
+START: Fri Dec  6 12:59:26 AM CET 2024
+JobID: 50324569
+END: Fri Dec  6 01:09:27 AM CET 2024
+Name                : a134_merge_alignments
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1022
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:45
+Start               : 2024-12-06T00:59:26
+End                 : --
+Waited              : 00:00:31
+Reserved walltime   : 18:00:00
+Used walltime       : 00:10:01
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 30G
+Max Mem used        : 22.94M (cn-1022)
+Max Disk Write      : 96.63G (cn-1022)
+Max Disk Read       : 96.62G (cn-1022)

@@ -1,0 +1,25 @@
+START: Fri Dec  6 04:31:55 AM CET 2024
+JobID: 50324720
+END: Fri Dec  6 04:37:08 AM CET 2024
+Name                : a138_filtering
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1007
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:54
+Start               : 2024-12-06T04:31:55
+End                 : --
+Waited              :   00:00:06
+Reserved walltime   : 1-00:00:00
+Used walltime       :   00:05:13
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 35.88M (cn-1007)
+Max Disk Write      : 59.81G (cn-1007)
+Max Disk Read       : 137.76G (cn-1007)

@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:48:20 PM CET 2024
+JobID: 50325310
+END: Thu Dec  5 04:09:18 PM CET 2024
+Name                : a488_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1056
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:10
+Start               : 2024-12-05T15:48:18
+End                 : --
+Waited              : 00:06:08
+Reserved walltime   : 12:00:00
+Used walltime       : 00:21:00
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 82.05M (cn-1056)
+Max Disk Write      : 93.20G (cn-1056)
+Max Disk Read       : 41.74G (cn-1056)

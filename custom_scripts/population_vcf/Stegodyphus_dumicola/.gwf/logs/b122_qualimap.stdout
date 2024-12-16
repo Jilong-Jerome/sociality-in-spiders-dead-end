@@ -1,0 +1,79 @@
+START: Thu Dec  5 09:41:27 PM CET 2024
+JobID: 50325437
+Java memory size is set to 300g
+Launching application...
+
+QualiMap v.2.3
+Built on 2023-05-19 16:57
+
+Selected tool: bamqc
+Available memory (Mb): 67
+Max memory (Mb): 322122
+Thu Dec 05 21:41:27 CET 2024		WARNING	Output folder already exists, the results will be saved there
+
+Starting bam qc....
+Loading sam header...
+Loading locator...
+Loading reference...
+Number of windows: 400, effective number of windows: 415
+Chunk of reads size: 1000
+Number of threads: 32
+Processed 50 out of 415 windows...
+Processed 100 out of 415 windows...
+Processed 150 out of 415 windows...
+Processed 200 out of 415 windows...
+Processed 250 out of 415 windows...
+Processed 300 out of 415 windows...
+Processed 350 out of 415 windows...
+Processed 400 out of 415 windows...
+Total processed windows:415
+Number of reads: 169963308
+Number of valid reads: 169846422
+Number of correct strand reads:0
+Thu Dec 05 21:53:10 CET 2024		WARNING	SAMRecordParser marked 116886 problematic reads.
+
+Inside of regions...
+Num mapped reads: 169846422
+Num mapped first of pair: 50782824
+Num mapped second of pair: 50658959
+Num singletons: 146926
+Time taken to analyze reads: 702
+Computing descriptors...
+numberOfMappedBases: 30768249753
+referenceSize: 3496719626
+numberOfSequencedBases: 30714654611
+numberOfAs: 10115388141
+Computing per chromosome statistics...
+Computing histograms...
+Overall analysis time: 712
+end of bam qc
+Computing report...
+Writing PDF:HTML report...
+HTML report created successfully
+
+PDF file created successfully 
+
+Finished
+END: Thu Dec  5 09:53:23 PM CET 2024
+Name                : b122_qualimap
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1029
+Cores               : 32
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:11
+Start               : 2024-12-05T21:41:26
+End                 : --
+Waited              :   00:07:23
+Reserved walltime   : 1-00:00:00
+Used walltime       :   00:11:57
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 300G
+Max Mem used        : 15.14G (cn-1029)
+Max Disk Write      : 1.90M (cn-1029)
+Max Disk Read       : 20.37G (cn-1029)

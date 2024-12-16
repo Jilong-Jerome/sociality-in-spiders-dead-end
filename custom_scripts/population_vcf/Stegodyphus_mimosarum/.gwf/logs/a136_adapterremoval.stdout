@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:43:21 PM CET 2024
+JobID: 50324606
+END: Thu Dec  5 04:38:27 PM CET 2024
+Name                : a136_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1056
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:45
+Start               : 2024-12-05T15:43:18
+End                 : --
+Waited              : 00:01:33
+Reserved walltime   : 12:00:00
+Used walltime       : 00:55:09
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 91.96M (cn-1056)
+Max Disk Write      : 263.87G (cn-1056)
+Max Disk Read       : 112.69G (cn-1056)

@@ -1,0 +1,25 @@
+START: Thu Dec  5 09:46:31 PM CET 2024
+JobID: 50325634
+END: Thu Dec  5 09:46:57 PM CET 2024
+Name                : b266_extract_unmapped_reads
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1043
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:13
+Start               : 2024-12-05T21:46:26
+End                 : --
+Waited              : 00:00:25
+Reserved walltime   : 12:00:00
+Used walltime       : 00:00:32
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 30G
+Max Mem used        : 30.76M (cn-1043)
+Max Disk Write      : 261.08M (cn-1043)
+Max Disk Read       : 29.28G (cn-1043)

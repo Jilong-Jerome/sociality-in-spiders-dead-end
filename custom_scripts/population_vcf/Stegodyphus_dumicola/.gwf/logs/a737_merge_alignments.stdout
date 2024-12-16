@@ -1,0 +1,25 @@
+START: Thu Dec  5 09:32:27 PM CET 2024
+JobID: 50325361
+END: Thu Dec  5 09:36:14 PM CET 2024
+Name                : a737_merge_alignments
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1034
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:11
+Start               : 2024-12-05T21:32:22
+End                 : --
+Waited              : 00:07:05
+Reserved walltime   : 18:00:00
+Used walltime       : 00:03:52
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 30G
+Max Mem used        : 23.76M (cn-1034)
+Max Disk Write      : 39.31G (cn-1034)
+Max Disk Read       : 39.30G (cn-1034)

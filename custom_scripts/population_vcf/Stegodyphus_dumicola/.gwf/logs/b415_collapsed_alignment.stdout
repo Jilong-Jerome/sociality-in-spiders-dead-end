@@ -1,0 +1,25 @@
+START: Thu Dec  5 07:19:18 PM CET 2024
+JobID: 50325579
+END: Thu Dec  5 09:20:12 PM CET 2024
+Name                : b415_collapsed_alignment
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1010
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:12
+Start               : 2024-12-05T19:19:16
+End                 : --
+Waited              :   02:27:42
+Reserved walltime   : 2-00:00:00
+Used walltime       :   02:00:56
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 26.26G (cn-1010)
+Max Disk Write      : 131.16G (cn-1010)
+Max Disk Read       : 168.01G (cn-1010)

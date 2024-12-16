@@ -1,0 +1,25 @@
+START: Thu Dec  5 09:49:31 PM CET 2024
+JobID: 50325631
+END: Thu Dec  5 10:19:13 PM CET 2024
+Name                : b231_pre_filter_stats
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1017
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:13
+Start               : 2024-12-05T21:49:25
+End                 : --
+Waited              : 00:00:19
+Reserved walltime   : 12:00:00
+Used walltime       : 00:29:49
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 40G
+Max Mem used        : 14.61M (cn-1017)
+Max Disk Write      : 1.00M (cn-1017)
+Max Disk Read       : 89.67G (cn-1017)

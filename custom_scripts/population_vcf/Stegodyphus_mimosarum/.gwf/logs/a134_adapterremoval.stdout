@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:42:25 PM CET 2024
+JobID: 50324562
+END: Thu Dec  5 04:21:39 PM CET 2024
+Name                : a134_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1057
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:45
+Start               : 2024-12-05T15:42:18
+End                 : --
+Waited              : 00:00:33
+Reserved walltime   : 12:00:00
+Used walltime       : 00:39:21
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 85.23M (cn-1057)
+Max Disk Write      : 191.15G (cn-1057)
+Max Disk Read       : 81.14G (cn-1057)

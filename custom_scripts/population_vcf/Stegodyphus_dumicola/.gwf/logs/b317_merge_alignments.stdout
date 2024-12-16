@@ -1,0 +1,25 @@
+START: Thu Dec  5 10:10:12 PM CET 2024
+JobID: 50325549
+END: Thu Dec  5 10:18:50 PM CET 2024
+Name                : b317_merge_alignments
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1012
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:12
+Start               : 2024-12-05T22:10:09
+End                 : --
+Waited              : 00:00:50
+Reserved walltime   : 18:00:00
+Used walltime       : 00:08:41
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 30G
+Max Mem used        : 22.90M (cn-1012)
+Max Disk Write      : 51.90G (cn-1012)
+Max Disk Read       : 51.89G (cn-1012)

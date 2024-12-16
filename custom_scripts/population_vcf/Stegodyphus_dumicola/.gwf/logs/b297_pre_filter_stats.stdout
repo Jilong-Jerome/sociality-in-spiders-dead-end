@@ -1,0 +1,25 @@
+START: Thu Dec  5 09:55:26 PM CET 2024
+JobID: 50325646
+END: Thu Dec  5 10:24:19 PM CET 2024
+Name                : b297_pre_filter_stats
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : s21n43
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:13
+Start               : 2024-12-05T21:55:24
+End                 : --
+Waited              : 00:00:03
+Reserved walltime   : 12:00:00
+Used walltime       : 00:28:55
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 40G
+Max Mem used        : 13.88M (s21n43)
+Max Disk Write      : 1.00M (s21n43)
+Max Disk Read       : 98.49G (s21n43)

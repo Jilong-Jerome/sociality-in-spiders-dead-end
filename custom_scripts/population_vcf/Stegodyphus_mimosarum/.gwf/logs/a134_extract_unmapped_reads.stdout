@@ -1,0 +1,25 @@
+START: Fri Dec  6 01:29:25 AM CET 2024
+JobID: 50324574
+END: Fri Dec  6 01:30:25 AM CET 2024
+Name                : a134_extract_unmapped_reads
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : s21n43
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:45
+Start               : 2024-12-06T01:29:23
+End                 : --
+Waited              : 00:00:22
+Reserved walltime   : 12:00:00
+Used walltime       : 00:01:02
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 30G
+Max Mem used        : 18.41M (s21n43)
+Max Disk Write      : 321.33M (s21n43)
+Max Disk Read       : 74.07G (s21n43)

@@ -1,0 +1,25 @@
+START: Thu Dec  5 05:25:02 PM CET 2024
+JobID: 50324564
+END: Thu Dec  5 08:15:06 PM CET 2024
+Name                : a134_collapsed_alignment
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1018
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:45
+Start               : 2024-12-05T17:24:49
+End                 : --
+Waited              :   00:36:07
+Reserved walltime   : 2-00:00:00
+Used walltime       :   02:50:17
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 25.39G (cn-1018)
+Max Disk Write      : 99.19G (cn-1018)
+Max Disk Read       : 125.62G (cn-1018)

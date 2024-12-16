@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:45:21 PM CET 2024
+JobID: 50325200
+END: Thu Dec  5 04:05:19 PM CET 2024
+Name                : a166_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1032
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:10
+Start               : 2024-12-05T15:45:17
+End                 : --
+Waited              : 00:03:07
+Reserved walltime   : 12:00:00
+Used walltime       : 00:20:02
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 88.61M (cn-1032)
+Max Disk Write      : 102.59G (cn-1032)
+Max Disk Read       : 42.88G (cn-1032)

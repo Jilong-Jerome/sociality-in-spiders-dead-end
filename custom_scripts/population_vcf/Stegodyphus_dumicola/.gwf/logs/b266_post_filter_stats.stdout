@@ -1,0 +1,25 @@
+START: Thu Dec  5 09:48:26 PM CET 2024
+JobID: 50325636
+END: Thu Dec  5 10:10:30 PM CET 2024
+Name                : b266_post_filter_stats
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : s21n41
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:13
+Start               : 2024-12-05T21:48:25
+End                 : --
+Waited              : 00:00:30
+Reserved walltime   : 12:00:00
+Used walltime       : 00:22:06
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 40G
+Max Mem used        : 14.36M (s21n41)
+Max Disk Write      : 1.00M (s21n41)
+Max Disk Read       : 56.58G (s21n41)

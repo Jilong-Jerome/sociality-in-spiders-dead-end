@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:47:19 PM CET 2024
+JobID: 50325288
+END: Thu Dec  5 04:04:40 PM CET 2024
+Name                : a455_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1059
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:10
+Start               : 2024-12-05T15:47:18
+End                 : --
+Waited              : 00:05:08
+Reserved walltime   : 12:00:00
+Used walltime       : 00:17:22
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 84.91M (cn-1059)
+Max Disk Write      : 93.83G (cn-1059)
+Max Disk Read       : 41.13G (cn-1059)

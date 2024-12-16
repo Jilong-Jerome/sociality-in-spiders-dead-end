@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:50:29 PM CET 2024
+JobID: 50325508
+END: Thu Dec  5 04:15:10 PM CET 2024
+Name                : b266_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1052
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:11
+Start               : 2024-12-05T15:50:23
+End                 : --
+Waited              : 00:08:12
+Reserved walltime   : 12:00:00
+Used walltime       : 00:24:47
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 80.01M (cn-1052)
+Max Disk Write      : 92.09G (cn-1052)
+Max Disk Read       : 41.22G (cn-1052)

@@ -1,0 +1,25 @@
+START: Thu Dec  5 09:39:26 PM CET 2024
+JobID: 50325346
+END: Thu Dec  5 09:41:34 PM CET 2024
+Name                : a645_filtering
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1032
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:11
+Start               : 2024-12-05T21:39:25
+End                 : --
+Waited              :   00:01:41
+Reserved walltime   : 1-00:00:00
+Used walltime       :   00:02:09
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 25.24M (cn-1032)
+Max Disk Write      : 21.16G (cn-1032)
+Max Disk Read       : 52.86G (cn-1032)

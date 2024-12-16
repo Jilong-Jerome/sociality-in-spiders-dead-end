@@ -1,0 +1,25 @@
+START: Thu Dec  5 07:12:19 PM CET 2024
+JobID: 50325511
+END: Thu Dec  5 09:21:56 PM CET 2024
+Name                : b266_collapsed_alignment
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1032
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:11
+Start               : 2024-12-05T19:12:15
+End                 : --
+Waited              :   02:20:41
+Reserved walltime   : 2-00:00:00
+Used walltime       :   02:09:41
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 26.47G (cn-1032)
+Max Disk Write      : 136.72G (cn-1032)
+Max Disk Read       : 176.89G (cn-1032)

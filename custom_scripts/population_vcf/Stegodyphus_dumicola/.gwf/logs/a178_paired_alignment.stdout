@@ -1,0 +1,25 @@
+START: Thu Dec  5 06:54:11 PM CET 2024
+JobID: 50325249
+END: Fri Dec  6 01:40:22 AM CET 2024
+Name                : a178_paired_alignment
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1036
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:10
+Start               : 2024-12-05T18:54:09
+End                 : --
+Waited              :   02:02:35
+Reserved walltime   : 2-00:00:00
+Used walltime       :   06:46:13
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 28.37G (cn-1036)
+Max Disk Write      : 315.57G (cn-1036)
+Max Disk Read       : 391.64G (cn-1036)

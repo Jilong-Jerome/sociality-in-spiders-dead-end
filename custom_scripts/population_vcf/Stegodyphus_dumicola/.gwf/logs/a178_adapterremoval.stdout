@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:46:20 PM CET 2024
+JobID: 50325244
+END: Thu Dec  5 04:14:01 PM CET 2024
+Name                : a178_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1040
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:10
+Start               : 2024-12-05T15:46:19
+End                 : --
+Waited              : 00:04:09
+Reserved walltime   : 12:00:00
+Used walltime       : 00:27:42
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 97.53M (cn-1040)
+Max Disk Write      : 166.56G (cn-1040)
+Max Disk Read       : 67.38G (cn-1040)

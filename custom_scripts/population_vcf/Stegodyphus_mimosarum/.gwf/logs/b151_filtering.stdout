@@ -1,0 +1,25 @@
+START: Fri Dec  6 01:42:24 AM CET 2024
+JobID: 50324824
+END: Fri Dec  6 01:47:04 AM CET 2024
+Name                : b151_filtering
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1007
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:55
+Start               : 2024-12-06T01:42:23
+End                 : --
+Waited              :   00:00:56
+Reserved walltime   : 1-00:00:00
+Used walltime       :   00:04:41
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 38.56M (cn-1007)
+Max Disk Write      : 69.97G (cn-1007)
+Max Disk Read       : 153.46G (cn-1007)

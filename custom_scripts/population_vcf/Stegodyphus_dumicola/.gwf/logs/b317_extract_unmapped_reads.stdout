@@ -1,0 +1,25 @@
+START: Thu Dec  5 10:31:16 PM CET 2024
+JobID: 50325649
+END: Thu Dec  5 10:31:47 PM CET 2024
+Name                : b317_extract_unmapped_reads
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1060
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:13
+Start               : 2024-12-05T22:31:13
+End                 : --
+Waited              : 00:00:06
+Reserved walltime   : 12:00:00
+Used walltime       : 00:00:34
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 30G
+Max Mem used        : 24.16M (cn-1060)
+Max Disk Write      : 478.63M (cn-1060)
+Max Disk Read       : 38.42G (cn-1060)

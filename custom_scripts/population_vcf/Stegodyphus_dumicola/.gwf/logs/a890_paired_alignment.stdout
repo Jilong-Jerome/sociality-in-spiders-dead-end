@@ -1,0 +1,25 @@
+START: Thu Dec  5 07:01:21 PM CET 2024
+JobID: 50325381
+END: Thu Dec  5 08:59:02 PM CET 2024
+Name                : a890_paired_alignment
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1022
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:11
+Start               : 2024-12-05T19:01:14
+End                 : --
+Waited              :   02:09:40
+Reserved walltime   : 2-00:00:00
+Used walltime       :   01:57:48
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 29.68G (cn-1022)
+Max Disk Write      : 86.16G (cn-1022)
+Max Disk Read       : 111.69G (cn-1022)

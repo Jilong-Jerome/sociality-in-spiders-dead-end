@@ -1,0 +1,47 @@
+START: Fri Dec  6 04:16:07 AM CET 2024
+JobID: 50325671
+Java memory size is set to 1200M
+Launching application...
+
+QualiMap v.2.3
+Built on 2023-05-19 16:57
+
+Selected tool: multi-bamqc
+Fri Dec 06 04:16:07 CET 2024		WARNING	Output folder already exists, the results will be saved there
+
+Running multi-sample BAM QC
+
+Checking input paths
+Loading sample data
+Creating charts
+
+Preparing result report
+Writing PDF:HTML report...
+HTML report created successfully
+
+PDF file created successfully 
+
+Finished
+END: Fri Dec  6 04:16:09 AM CET 2024
+Name                : stables_multi_qualimap
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1032
+Cores               : 32
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:13
+Start               : 2024-12-06T04:16:06
+End                 : --
+Waited              :   00:01:51
+Reserved walltime   : 1-00:00:00
+Used walltime       :   00:00:03
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 300G
+Max Mem used        : 20.44M (cn-1032)
+Max Disk Write      : 2.79M (cn-1032)
+Max Disk Read       : 14.50M (cn-1032)

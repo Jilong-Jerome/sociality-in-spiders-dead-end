@@ -1,0 +1,25 @@
+START: Thu Dec  5 09:36:31 PM CET 2024
+JobID: 50325363
+END: Thu Dec  5 09:46:07 PM CET 2024
+Name                : a737_markdup
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1032
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:11
+Start               : 2024-12-05T21:36:24
+End                 : --
+Waited              :   00:00:06
+Reserved walltime   : 1-00:00:00
+Used walltime       :   00:09:43
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 13.68G (cn-1032)
+Max Disk Write      : 135.69G (cn-1032)
+Max Disk Read       : 174.99G (cn-1032)

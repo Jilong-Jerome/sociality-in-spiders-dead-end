@@ -1,0 +1,25 @@
+START: Fri Dec  6 02:19:21 AM CET 2024
+JobID: 50324592
+END: Fri Dec  6 02:31:09 AM CET 2024
+Name                : a135_merge_alignments
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1001
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:45
+Start               : 2024-12-06T02:19:20
+End                 : --
+Waited              : 00:00:36
+Reserved walltime   : 18:00:00
+Used walltime       : 00:11:49
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 30G
+Max Mem used        : 26.59M (cn-1001)
+Max Disk Write      : 105.98G (cn-1001)
+Max Disk Read       : 105.97G (cn-1001)

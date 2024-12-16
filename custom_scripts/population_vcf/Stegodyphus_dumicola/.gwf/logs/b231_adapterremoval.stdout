@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:49:23 PM CET 2024
+JobID: 50325491
+END: Thu Dec  5 04:07:17 PM CET 2024
+Name                : b231_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : cn-1048
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:42:11
+Start               : 2024-12-05T15:49:18
+End                 : --
+Waited              : 00:07:07
+Reserved walltime   : 12:00:00
+Used walltime       : 00:18:00
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 87.15M (cn-1048)
+Max Disk Write      : 93.83G (cn-1048)
+Max Disk Read       : 41.54G (cn-1048)

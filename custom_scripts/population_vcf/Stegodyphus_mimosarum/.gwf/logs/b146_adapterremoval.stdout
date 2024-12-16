@@ -1,0 +1,25 @@
+START: Thu Dec  5 03:44:18 PM CET 2024
+JobID: 50324754
+END: Thu Dec  5 04:38:33 PM CET 2024
+Name                : b146_adapterremoval
+User                : jilong
+Account             : spider2
+Partition           : short
+Nodes               : s21n41
+Cores               : 16
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:54
+Start               : 2024-12-05T15:44:17
+End                 : --
+Waited              : 00:02:23
+Reserved walltime   : 12:00:00
+Used walltime       : 00:54:16
+Used CPU time       : 00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 86.30M (s21n41)
+Max Disk Write      : 258.59G (s21n41)
+Max Disk Read       : 85.23G (s21n41)

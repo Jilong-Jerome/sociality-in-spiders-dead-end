@@ -1,0 +1,25 @@
+START: Thu Dec  5 05:41:00 PM CET 2024
+JobID: 50324611
+END: Fri Dec  6 01:46:41 AM CET 2024
+Name                : a136_paired_alignment
+User                : jilong
+Account             : spider2
+Partition           : normal
+Nodes               : cn-1020
+Cores               : 18
+GPUs                : 0
+State               : RUNNING
+ExitCode            : --
+Submit              : 2024-12-05T15:41:45
+Start               : 2024-12-05T17:40:56
+End                 : --
+Waited              :   00:52:14
+Reserved walltime   : 2-00:00:00
+Used walltime       :   08:05:45
+Used CPU time       :   00:00:00
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 60G
+Max Mem used        : 25.87G (cn-1020)
+Max Disk Write      : 432.37G (cn-1020)
+Max Disk Read       : 526.95G (cn-1020)
