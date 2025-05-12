@@ -1,6 +1,22 @@
 # sociality-in-spiders-dead-end
 Pipelines and scripts for data analysis of the project "Sociality in spiders is an evolutionary dead end"
 
+
+## Relevant data
+
+Due to changes in the version of genome in NCBI, the matched gene annotation file (in gff3 format) and corresponding genome assemblies are avaible at this shared [google drive](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end.git)
+
+The data include 6 species
+DUM:	Stegodyphus dumicola
+MIM:	Stegodyphus mimosarum
+SAR:	Stegodyphus sarasinorum
+TEN:	Stegodyphus tentoriicola
+BIC:	Stegodyphus bicolor
+LIN:	Stegodyphus lineatus
+
+The correspondence of each chromosome id in the NCBI genome assembly can be found in 
+[Chromosome ID](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/tree/main/data_source/assembly)
+
 ## [Genome Assembly](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/README.md)
 Please see details in [Genome Assembly](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/README.md) page. 
 ### Hifiasm
