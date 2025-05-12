@@ -20,7 +20,7 @@ BIC:	*Stegodyphus bicolor*
 
 LIN:	*Stegodyphus lineatus*
 
-The correspondence of each chromosome id in the NCBI genome assembly can be found in 
+The correspondence of each chromosome id from the orignal version to the NCBI version can be found in 
 [Chromosome ID](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/tree/main/data_source/assembly)
 
 ## [Genome Assembly](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/blob/main/Genome_Assembly/README.md)
