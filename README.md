@@ -4,7 +4,7 @@ Pipelines and scripts for data analysis of the project "Sociality in spiders is 
 
 ## Relevant data
 
-Due to changes in the version of genome in NCBI, the matched gene annotation file (in gff3 format) and corresponding genome assemblies that is originally used in ["The Genomic Consequences and Persistence of Sociality in Spiders"](https://genome.cshlp.org/content/35/3/499) are provided separately at this shared [google drive](https://drive.google.com/drive/folders/16fIrBR4WrqV_NZBOF8aL6mcuzGkkhM9E?usp=sharing)
+Due to changes in the version of genome in NCBI, the matched gene annotation files (in gff3 format) and corresponding genome assemblies that are originally used in ["The Genomic Consequences and Persistence of Sociality in Spiders"](https://genome.cshlp.org/content/35/3/499) are provided separately at this shared [google drive](https://drive.google.com/drive/folders/16fIrBR4WrqV_NZBOF8aL6mcuzGkkhM9E?usp=sharing)
 
 The data include genome reference fasta and annotation files of 6 species
 
