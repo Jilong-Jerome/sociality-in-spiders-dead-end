@@ -4,15 +4,21 @@ Pipelines and scripts for data analysis of the project "Sociality in spiders is 
 
 ## Relevant data
 
-Due to changes in the version of genome in NCBI, the matched gene annotation file (in gff3 format) and corresponding genome assemblies are avaible at this shared [google drive](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end.git)
+Due to changes in the version of genome in NCBI, the matched gene annotation file (in gff3 format) and corresponding genome assemblies that is originally used in ["The Genomic Consequences and Persistence of Sociality in Spiders"](https://genome.cshlp.org/content/35/3/499) are avaible at this shared [google drive](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end.git)
 
 The data include 6 species
-DUM:	Stegodyphus dumicola
-MIM:	Stegodyphus mimosarum
-SAR:	Stegodyphus sarasinorum
-TEN:	Stegodyphus tentoriicola
-BIC:	Stegodyphus bicolor
-LIN:	Stegodyphus lineatus
+
+DUM:	*Stegodyphus dumicola*
+
+MIM:	*Stegodyphus mimosarum*
+
+SAR:	*Stegodyphus sarasinorum*
+
+TEN:	*Stegodyphus tentoriicola*
+
+BIC:	*Stegodyphus bicolor*
+
+LIN:	*Stegodyphus lineatus*
 
 The correspondence of each chromosome id in the NCBI genome assembly can be found in 
 [Chromosome ID](https://github.com/Jilong-Jerome/sociality-in-spiders-dead-end/tree/main/data_source/assembly)
